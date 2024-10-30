@@ -1,0 +1,28 @@
+{
+  "name": "@repo/filters",
+  "version": "1.0.0",
+  "exports": {
+    "./Filters": "./src/Filters.jsx",
+    "./SelectFilter": "./src/SelectFilter.jsx",
+    "./TimeFilters": "./src/TimeFilters.jsx",
+    "./BarChartFilter": "./src/BarChartFilter.jsx",
+    "./FunctionButton": "./src/FunctionButton.jsx",
+    "./ComputeGroupedStats": "./src/functions/ComputeGroupedStats.js",
+    "./ApplyFilters": "./src/functions/ApplyFilters.js",
+    "./GetActiveFilters": "./src/functions/GetActiveFilters.js",
+    "./InitializeFilters": "./src/functions/InitializeFilters.js"
+  },
+  "description": "Custom filters for data pulled from servers",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "recharts": "^2.12.1",
+    "dayjs": "^1.11.10",
+    "@headlessui/react": "2.1.1",
+    "@radix-ui/react-toggle-group": "^1.1.0",
+    "@mui/icons-material": "^5.15.7",
+    "@mui/material": "^5.15.7",
+    "@mui/x-date-pickers": "^6.19.3"
+  }
+}

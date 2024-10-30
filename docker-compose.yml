@@ -1,0 +1,111 @@
+version: "3"
+
+services:
+  # habit-tracker-react:
+  #   container_name: habit-tracker-react
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/tracker/Dockerfile
+  #   ports:
+  #     - 3300:3000
+  #   working_dir: /app/apps/tracker
+  #   entrypoint: ["yarn", "dev"]
+  #   volumes: #these volumes enable hot reload for file changes
+  #     - ./apps/tracker/src:/app/apps/tracker/src #source code for current project
+  #     - ./packages:/app/packages #shared turborepo packages
+  #   tty: true
+
+  # habit-tracker-api:
+  #   container_name: habit-tracker-api
+  #   image: habit-tracker-api
+  #   environment:
+  #     - ROOT_PATH=/app
+  #   depends_on:
+  #     habit-tracker-db:
+  #       condition: service_healthy
+  #   ports:
+  #     - 8001:8000
+  #   volumes:
+  #     - ./habit-tracker-api:/app
+  #     - ./python-modules:/app/python-modules
+
+  # habit-tracker-db:
+  #   container_name: habit-tracker-db
+  #   image: postgres
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - PGUSER=postgres
+  #     - POSTGRES_PASSWORD=password
+  #     - POSTGRES_DB=habit-tracker-db
+  #   command: postgres -c 'max_connections=200'
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready"]
+  #     interval: 1s
+  #     timeout: 5s
+  #     retries: 10
+  #   volumes:
+  #     - ./habit-tracker-db/db:/var/lib/postgresql/data
+  #     # Run a command after the container starts to create the test database
+  #     - ./scripts/create_test_db.sh:/docker-entrypoint-initdb.d/create_test_db.sh
+  #   restart: always
+
+  time-series-react:
+    container_name: time-series-react
+    build:
+      context: .
+      dockerfile: ./apps/time-series/Dockerfile
+    ports:
+      - 3200:3000
+    working_dir: /app/apps/time-series
+    entrypoint: ["yarn", "dev"]
+    volumes: #these volumes enable hot reload for file changes
+      - ./apps/time-series/src:/app/apps/time-series/src #source code for current project
+      - ./packages:/app/packages #shared turborepo packages
+    tty: true
+
+  time-series-api:
+    container_name: time-series-api
+    build:
+      context: .
+      dockerfile: ./time-series-api/Dockerfile
+    # image: fastapi_v4
+    environment:
+      - ROOT_PATH=/app
+    depends_on:
+      time-series-db:
+        condition: service_healthy
+    ports:
+      - 8000:8000
+    volumes:
+      - ./time-series-api:/app
+      - ./python-modules:/app/python-modules
+
+  time-series-db:
+    container_name: time-series-db
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=async_postgres
+    command: postgres -c 'max_connections=200'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./time-series-db/db:/var/lib/postgresql/data
+      # Run a command after the container starts to create the test database
+      - ./scripts/create_test_db.sh:/docker-entrypoint-initdb.d/create_test_db.sh
+    restart: always
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    ports:
+      - "5032:80"
+    restart: always

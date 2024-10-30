@@ -1,0 +1,16 @@
+{
+  "name": "@repo/charts",
+  "version": "1.0.0",
+  "exports": {
+    "./BokehLineChart": "./src/BokehLineChart.jsx",
+    "./Charts": "./src/Charts.jsx"
+  },
+  "description": "Custom bokeh table line chart",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "@mui/material": "^5.15.7",
+    "@bokeh/bokehjs": "^2.4.3"
+  }
+}

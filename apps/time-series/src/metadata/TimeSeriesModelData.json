@@ -1,0 +1,25 @@
+{
+  "model_name": "Time Series Data",
+  "chart_filters": [],
+  "get_api_url": "/fastapi/loader/load_dataset_from_id",
+  "model_attributes": [
+    {
+      "name": "value",
+      "data_type": "number",
+      "default": 0,
+      "filter_empty": ""
+    },
+    {
+      "name": "timestamp",
+      "data_type": "datetime",
+      "default": "2024-08-22T14:08:41.584612",
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" }
+    },
+    {
+      "name": "anomaly_label",
+      "data_type": "boolean",
+      "default": false,
+      "filter_empty": ""
+    }
+  ]
+}

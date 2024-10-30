@@ -1,0 +1,22 @@
+{
+  "name": "@repo/datatable",
+  "version": "1.0.0",
+  "exports": {
+    "./DataTable": "./src/DataTable.jsx",
+    "./KeyValueTable": "./src/KeyValueTable.jsx",
+    "./StatsTable": "./src/StatsTable.jsx",
+    "./ColumnGenerator": "./src/ColumnGenerator.jsx",
+    "./RowActions": "./src/RowActions.jsx",
+    "./dayjs_sorter": "./src/functions/dayjs_sorter.js"
+  },
+  "description": "Custom data table built using react query table",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@tanstack/react-table": "^8.11.8",
+    "@mui/material": "^5.15.7"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "detectors": [
+    {
+      "name": "bayesChangePt",
+      "description": "The algorithm computes, for each record at step x in a data stream, the probability that the current record is part of a stream of length n for all n <= x. For a given record, if the maximimum of all the probabilities corresponds to a stream length of zero, the record represents a changepoint in the data stream. These probabilities are used to calculate anomaly scores for NAB results.",
+      "tags": ["Real"],
+      "source": " Ryan P. Adams, David J.C. MacKay, 'Bayesian Online Changepoint Detection', arXiv 0710.3742 (2007)",
+      "documentation": "https://github.com/numenta/NAB/wiki#nab-whitepaper"
+    },
+    {
+      "name": "null",
+      "description": "This detector establishes a baseline score by recording a constant value for all data points.",
+      "tags": ["Demo"]
+    },
+    {
+      "name": "random",
+      "description": "A model that returns random anomaly scores for demonstration purposes.",
+      "tags": ["Demo"]
+    },
+    {
+      "name": "relativeEntropy",
+      "description": " The algorithm is based on a hypothesis testing approach that compares observed data against multiple null hypotheses, representing frequencies of quantized data over a window. If the observed data is unseen and does not agree with any existing hypothesis, it is declared anomalous and a new hypothesis is created. Otherwise, it is declared non-anomalous, provided that the accepted hypothesis occurs frequently enough. Decision to accept/reject a null hypothesis is based on relative entropy compared against a threshold of acceptable false negative probability determined by the chi-squared distribution. Step-by-step details are given in code comments and parameters have been tuned for best performance of NAB.",
+      "tags": ["Real"],
+      "source": "Statistical Techniques for Online Anomaly Detection in Data Centers, Proceedings of the 8th ACM international conference on Autonomic computing. ACM, 2011"
+    },
+    {
+      "name": "ARTime",
+      "description": "This is an open source (AGPL3) and simplified version of ARTime, an anomaly detection algorithm.",
+      "tags": ["Real"],
+      "source": "https://github.com/markNZed/ARTimeNAB.jl"
+    },
+    {
+      "name": "skyline",
+      "description": "Skyline is a Python based time series analysis and performance monitoring application that helps you to monitor and better understand complex systems and their interactions.",
+      "tags": ["Real"],
+      "source": "https://github.com/earthgecko/skyline/tree/master",
+      "documentation": "https://earthgecko-skyline.readthedocs.io/en/latest/overview.html"
+    }
+  ]
+}

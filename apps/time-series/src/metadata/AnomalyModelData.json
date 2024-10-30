@@ -1,0 +1,160 @@
+{
+  "chart_filters": [
+    { "name": "detector_name", "type": "bar", "key": "count" },
+    { "name": "status", "type": "bar", "key": "count" },
+    { "name": "severity", "type": "bar", "key": "count" }
+  ],
+  "get_api_url": "/fastapi/anomaly/get_all",
+  "add_api_url": "/fastapi/anomaly/create",
+  "update_api_url": "/fastapi/anomaly/update",
+  "delete_api_url": "/fastapi/anomaly/delete?column=id",
+  "model_attributes": [
+    {
+      "name": "id",
+      "source": "db",
+      "type": "id",
+      "title": "Id",
+      "editable": false,
+      "filter": false
+    },
+    {
+      "name": "time_created",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Created",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "time_updated",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Updated",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "value",
+      "source": "main",
+      "type": "number",
+      "title": "Value",
+      "editable": true,
+      "default": 0,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": ">"
+    },
+    {
+      "name": "time",
+      "source": "main",
+      "type": "datetime",
+      "title": "Time",
+      "editable": true,
+      "default": "2024-10-29T11:05:01.277676",
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "anomaly_score",
+      "source": "main",
+      "type": "number",
+      "title": "Anomaly Score",
+      "editable": true,
+      "default": 0,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": ">"
+    },
+    {
+      "name": "threshold",
+      "source": "main",
+      "type": "number",
+      "title": "Threshold",
+      "editable": true,
+      "default": 0,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": ">"
+    },
+    {
+      "name": "status",
+      "source": "main",
+      "type": "string",
+      "title": "Status",
+      "editable": true,
+      "default": "test",
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "severity",
+      "source": "main",
+      "type": "select",
+      "title": "Severity",
+      "options": [
+        { "value": "low", "label": "low" },
+        { "value": "medium", "label": "medium" },
+        { "value": "high", "label": "high" }
+      ],
+      "editable": true,
+      "default": "medium",
+      "filter": true,
+      "filter_empty": [],
+      "filter_rule": "any"
+    },
+    {
+      "name": "tags",
+      "source": "main",
+      "type": "list",
+      "title": "Tags",
+      "options": [],
+      "editable": true,
+      "default": [],
+      "filter": true,
+      "filter_empty": [],
+      "filter_rule": "any"
+    },
+    {
+      "name": "detector_id",
+      "source": "db",
+      "type": "id",
+      "title": "Detector Id",
+      "editable": false,
+      "filter": false
+    },
+    {
+      "name": "detector_name",
+      "source": "db",
+      "type": "string",
+      "title": "Detector Name",
+      "editable": false,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "dataset_name",
+      "source": "db",
+      "type": "string",
+      "title": "Dataset Name",
+      "editable": false,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "prediction_id",
+      "source": "db",
+      "type": "id",
+      "title": "Prediction Id",
+      "editable": false,
+      "filter": false
+    }
+  ]
+}

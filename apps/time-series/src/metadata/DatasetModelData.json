@@ -1,0 +1,160 @@
+{
+  "model_name": "Dataset",
+  "chart_filters": [{ "name": "folder", "key": "count" }],
+  "get_api_url": "/fastapi/dataset/get_all",
+  "add_api_url": "/fastapi/dataset/create",
+  "update_api_url": "/fastapi/dataset/update",
+  "delete_api_url": "/fastapi/dataset/delete?column=id",
+  "model_attributes": [
+    {
+      "name": "id",
+      "source": "db",
+      "type": "id",
+      "title": "Id",
+      "editable": false,
+      "filter": false
+    },
+    {
+      "name": "time_created",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Created",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "time_updated",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Updated",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "folder",
+      "source": "main",
+      "type": "string",
+      "title": "Folder",
+      "editable": true,
+      "default": "test",
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "filename",
+      "source": "main",
+      "type": "string",
+      "title": "Filename",
+      "editable": true,
+      "default": "test",
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "path",
+      "source": "main",
+      "type": "string",
+      "title": "Path",
+      "editable": true,
+      "default": "test",
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "labeled",
+      "source": "main",
+      "type": "boolean",
+      "title": "Labeled",
+      "editable": true,
+      "default": false,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": null
+    },
+    {
+      "name": "file_type",
+      "source": "main",
+      "type": "select",
+      "title": "FileType",
+      "options": [
+        { "value": "json", "label": "json" },
+        { "value": "csv", "label": "csv" },
+        { "value": "stream", "label": "stream" },
+        { "value": "excel", "label": "excel" }
+      ],
+      "editable": true,
+      "default": "csv",
+      "filter": true,
+      "filter_empty": [],
+      "filter_rule": "any"
+    },
+    {
+      "name": "anomaly_count",
+      "source": "main",
+      "type": "number",
+      "title": "Anomaly Count",
+      "editable": true,
+      "default": 0,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": ">"
+    },
+    {
+      "name": "tags",
+      "source": "main",
+      "type": "list",
+      "title": "Tags",
+      "options": [],
+      "editable": true,
+      "default": [],
+      "filter": true,
+      "filter_empty": [],
+      "filter_rule": "any"
+    },
+    {
+      "name": "start_time",
+      "source": "main",
+      "type": "datetime",
+      "title": "Start Time",
+      "editable": true,
+      "default": "2024-10-29T11:05:01.288677",
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "end_time",
+      "source": "main",
+      "type": "datetime",
+      "title": "End Time",
+      "editable": true,
+      "default": "2024-10-29T11:05:01.288677",
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "datafeed_id",
+      "source": "db",
+      "type": "id",
+      "title": "Datafeed Id",
+      "editable": false,
+      "filter": false
+    },
+    {
+      "name": "predictions",
+      "source": "db",
+      "type": "children",
+      "title": "Predictions",
+      "editable": false,
+      "filter": false
+    }
+  ]
+}
