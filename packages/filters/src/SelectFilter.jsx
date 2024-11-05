@@ -1,14 +1,12 @@
 import React from "react";
+//context
+import { FilterContext } from "./FilterContext";
+
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-export function SelectFilter({
-  filters,
-  change_filters,
-  name,
-  options,
-  ...props
-}) {
+export function SelectFilter({ name, options, ...props }) {
+  var { filters, change_filters } = React.useContext(FilterContext);
   //special formData updater function for select comboboxes as input differs from other inputs are objects and multiple items can used
   function handleComboboxChange(name, value) {
     var entries = [];

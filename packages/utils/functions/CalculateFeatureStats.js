@@ -1,9 +1,11 @@
 import React from "react";
 
 import dayjs from "dayjs";
+import { bin } from "d3";
 import { dayjs_sorter } from "@repo/datatable/dayjs_sorter";
 import { ComputeTimeBounds } from "./ComputeTimeBounds";
 import { ComputeGroupedStats } from "./ComputeGroupedStats";
+import { DoubleGroupStats } from "./ComputeGroupedStats";
 
 export function CalculateFeatureStats(metadata, dataset) {
   var stats = {};
@@ -24,24 +26,60 @@ export function CalculateFeatureStats(metadata, dataset) {
         value: Math.max(...dataset.map((entry) => entry[name])),
       };
 
-      stats[name].push(min, max);
+      var bins = bin().value((d) => d[name])(dataset);
+      var bins = bins.map((entry) => {
+        return {
+          x0: entry["x0"],
+          x1: entry["x1"],
+          count: entry.length,
+          range: entry["x0"] + "-" + entry["x1"],
+        };
+      });
+
+      var bin_stat = {
+        name: "bins",
+        type: "bins",
+        value: bins,
+      };
+
+      stats[name].push(min, max, bin_stat);
     }
 
     if (item["type"] === "list") {
+      var counts = {};
+
       var options = new Set();
       dataset.map((entry) => {
         entry[name].map((option) => {
+          if (counts[option]) {
+            counts[option] += 1;
+          } else {
+            counts[option] = 1;
+          }
           options.add(option);
         });
       });
 
-      var entry = {
+      var session_counts = [];
+      for (var [key, value] of Object.entries(counts)) {
+        //convert list of counts into {length: 7, name: 'nab'} format
+        var entry = { length: value, name: key };
+        session_counts.push(entry);
+      }
+
+      var count = {
+        name: "count",
+        type: "count",
+        value: session_counts,
+      };
+
+      var options = {
         name: "options",
         type: "list",
         value: Array.from(options.values()),
       };
 
-      stats[name].push(entry);
+      stats[name].push(count, options);
     }
 
     if (item["type"] === "string" || item["type"] === "select") {
@@ -76,14 +114,26 @@ export function CalculateFeatureStats(metadata, dataset) {
         //don't compute these time bins for time_created, time_updated
         dataset = dataset.map((item) => convert_dates(item, name));
 
-        daily = ComputeGroupedStats(dataset, name + "-day");
+        var daily = ComputeGroupedStats(dataset, name + "-day");
         daily = daily.sort(sort_dates("name"));
 
-        weekly = ComputeGroupedStats(dataset, name + "-week");
+        var weekly = ComputeGroupedStats(dataset, name + "-week");
         weekly = weekly.sort(sort_dates("name"));
 
-        monthly = ComputeGroupedStats(dataset, name + "-month");
+        var monthly = ComputeGroupedStats(dataset, name + "-month");
         monthly = monthly.sort(sort_dates("name"));
+
+        var monthly_severity = DoubleGroupStats(
+          dataset,
+          name + "-month",
+          "severity"
+        );
+
+        var stat_monthly_severity = {
+          name: "monthly-severity",
+          type: "count",
+          value: monthly_severity,
+        };
 
         var stat_daily = {
           name: "daily",
@@ -100,11 +150,15 @@ export function CalculateFeatureStats(metadata, dataset) {
           type: "count",
           value: monthly,
         };
-        stats[name].push(stat_daily, stat_weekly, stat_monthly);
+        stats[name].push(
+          stat_daily,
+          stat_weekly,
+          stat_monthly,
+          stat_monthly_severity
+        );
       }
     }
   });
-  console.log(stats);
   return stats;
 }
 

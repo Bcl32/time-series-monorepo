@@ -8,6 +8,7 @@
     "./Button": "./src/Button.jsx",
     "./Dropdown": "./src/Dropdown.jsx",
     "./Tooltip": "./src/Tooltip.jsx",
+    "./RadioButton": "./src/RadioButton.jsx",
     "./Breadcrumb": "./src/Breadcrumb.jsx",
     "./ComputeTimeBounds": "./functions/ComputeTimeBounds.js",
     "./ComputeGroupedStats": "./functions/ComputeGroupedStats.js",
@@ -24,6 +25,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "dayjs": "^1.11.10",
+    "d3": "^7.9.0",
     "lucide-react": "^0.447.0",
     "tailwind-merge": "^2.5.2",
     "class-variance-authority": "^0.2.2",

@@ -1,11 +1,13 @@
 import React from "react";
+//context
+import { FilterContext } from "./FilterContext";
 
 //MONOREPO PACKAGE IMPORTS
 import { Button } from "@repo/utils/Button";
 import { ToggleGroup, ToggleGroupItem } from "@repo/utils/ToggleGroup";
 
-function DebouncedNumberInput({ filters, change_filters, name, ...props }) {
-  const [filterRule, setfilterRule] = React.useState("left");
+function DebouncedTextFilter({ name, ...props }) {
+  var { filters, change_filters } = React.useContext(FilterContext);
 
   //place value in state as when leaving this when inside a tab will remove the state when coming back to the tab
   const [inputValue, setInputValue] = React.useState(filters[name]["value"]);
@@ -13,7 +15,7 @@ function DebouncedNumberInput({ filters, change_filters, name, ...props }) {
 
   //changes original input
   const handleInputChange = (event) => {
-    setInputValue(event.target.value); // value is a string when returned, to change to number use event.target.valueAsNumber
+    setInputValue(event.target.value);
   };
 
   //debounce the input
@@ -28,38 +30,29 @@ function DebouncedNumberInput({ filters, change_filters, name, ...props }) {
   React.useEffect(() => {
     change_filters(name, "value", debouncedInputValue);
   }, [debouncedInputValue]);
+
   function reset_value() {
     change_filters(name, "value", filters[name]["filter_empty"]);
     setInputValue(""); //clears display of input
   }
+
   return (
     <div className="flex flex-row items-center justify-between p-1 space-x-1">
       <span className="font-semibold">
         {/* capitalizes the string */}
         {name[0].toUpperCase() + name.slice(1)}:
       </span>
-      <input
-        type="number"
-        name={name}
-        value={inputValue}
-        key={"duration_select"}
-        onChange={handleInputChange}
-        id="hs-floating-input-email"
-        className="peer p-4 block w-full border-gray-200 rounded-lg text-2xl placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-  [&:not(:placeholder-shown)]:pt-6
-  [&:not(:placeholder-shown)]:pb-2"
-        placeholder="servings"
-      />
-      <label
-        htmlFor="hs-floating-input-email"
-        className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
 
-    peer-[:not(:placeholder-shown)]:text-xs
-    peer-[:not(:placeholder-shown)]:-translate-y-1.5
-    peer-[:not(:placeholder-shown)]:text-gray-500"
-      >
-        {name[0].toUpperCase() + name.slice(1)}
-      </label>
+      <input
+        name={name}
+        id={"filter_" + name}
+        value={inputValue}
+        onChange={handleInputChange}
+        type="text"
+        className="flex-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder=""
+      />
+
       <ToggleGroup
         type="single"
         variant="outline"
@@ -69,9 +62,8 @@ function DebouncedNumberInput({ filters, change_filters, name, ...props }) {
           change_filters(name, "rule", value);
         }}
       >
-        <ToggleGroupItem value="<">{"<"}</ToggleGroupItem>
-        <ToggleGroupItem value="=">{"="}</ToggleGroupItem>
-        <ToggleGroupItem value=">">{">"}</ToggleGroupItem>
+        <ToggleGroupItem value="contains">{"contains"}</ToggleGroupItem>
+        <ToggleGroupItem value="equals">{"equals"}</ToggleGroupItem>
       </ToggleGroup>
 
       <Button onClick={reset_value} variant="blue" size="lg">
@@ -81,4 +73,4 @@ function DebouncedNumberInput({ filters, change_filters, name, ...props }) {
   );
 }
 
-export default DebouncedNumberInput;
+export default DebouncedTextFilter;

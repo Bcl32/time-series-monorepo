@@ -86,6 +86,9 @@ function format_stats(data) {
     var value = item["value"];
 
     switch (item["type"]) {
+      case "number":
+        key_value_pairs.push({ name: name, value: value });
+        break;
       case "datetime":
         value = dayjs(value).format("MMM, D YYYY - h:mma");
         key_value_pairs.push({ name: name, value: value });
@@ -100,12 +103,11 @@ function format_stats(data) {
         break;
 
       case "list":
-        console.log(value);
-
         key_value_pairs.push({ name: name, value: value.toString() });
         break;
 
       case "object":
+      case "bins":
         value = (
           <pre
             className="h-36 max-w-xl overflow-auto"
@@ -147,7 +149,14 @@ function format_stats(data) {
         // }
         break;
       default:
-        console.log(item);
+        value = (
+          <pre
+            className="h-36 max-w-xl overflow-auto"
+            style={{ fontSize: "14px" }}
+          >
+            <code>{JSON.stringify(item["value"], null, 2)}</code>
+          </pre>
+        );
         key_value_pairs.push({ name: name, value: value });
         break;
     }

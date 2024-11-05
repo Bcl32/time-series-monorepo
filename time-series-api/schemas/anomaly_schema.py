@@ -16,7 +16,7 @@ class Anomaly_Base(BaseModel):
     model_config = ConfigDict(use_enum_values=True, from_attributes=True)
     
     value: float = Field(default=0)
-    time: datetime = Field(default=datetime.now(),description='The datetime of the record labeled anomalous')
+    time: datetime = Field(default=datetime.now(),description='The datetime of the record labeled anomalous',json_schema_extra={'stats': True})
     anomaly_score: float = Field(default=0)
     threshold: float = Field(default=0)
     status: str = Field(default="test", min_length=1, max_length=127)

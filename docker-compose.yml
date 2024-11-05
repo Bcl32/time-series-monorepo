@@ -70,7 +70,7 @@ services:
       dockerfile: ./time-series-api/Dockerfile
     # image: fastapi_v4
     environment:
-      - ROOT_PATH=/app
+      - CONTAINER_PATH=/app
     depends_on:
       time-series-db:
         condition: service_healthy

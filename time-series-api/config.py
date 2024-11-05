@@ -4,9 +4,11 @@ from pydantic.types import SecretStr
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-ROOT_PATH=os.environ.get('ROOT_PATH') 
+if "CONTAINER_PATH" in os.environ: #var is defined in docker container
+    ROOT_PATH=os.environ.get('CONTAINER_PATH') 
+else:
+    load_dotenv() #if not load the definition from .env file
+    ROOT_PATH=os.environ.get('ROOT_PATH') 
 
 INPUT_FILES = './static/input_files'
 

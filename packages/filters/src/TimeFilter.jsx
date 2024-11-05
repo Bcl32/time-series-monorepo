@@ -1,4 +1,6 @@
 import React from "react";
+//context
+import { FilterContext } from "./FilterContext";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -8,9 +10,6 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 //mui
-import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
@@ -24,7 +23,9 @@ import { DialogButton } from "@repo/utils/DialogButton";
 //local imports
 import TimeEditDialog from "./TimeEditDialog";
 
-export function TimeFilters({ filters, change_filters, name, ...props }) {
+export function TimeFilter({ name, ...props }) {
+  var { filters, change_filters } = React.useContext(FilterContext);
+
   function change_time_filter(name, timespan, value) {
     var timespans = JSON.parse(JSON.stringify(filters[name]["value"])); //get current values
     timespans[timespan] = value; //update the value for the selected timespan (begin or end)

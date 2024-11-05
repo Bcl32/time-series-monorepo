@@ -1,3 +1,7 @@
+import React from "react";
+//context
+import { FilterContext } from "./FilterContext";
+
 import {
   BarChart,
   Bar,
@@ -15,13 +19,17 @@ import {
   ChartTooltipContent,
 } from "@repo/charts/Charts";
 
-export function BarChartFilter({ name, filters, ...props }) {
-  console.log(name, filters, props.grouped_data);
+export function BarChartFilter({ name, chart_data }) {
+  var { filters, change_filters } = React.useContext(FilterContext);
+
   function bar_click(value) {
-    if (filters[name]["type"] == "select") {
+    if (
+      filters[name]["type"] === "select" ||
+      filters[name]["type"] === "list"
+    ) {
       value = [value];
     }
-    props.change_filters(name, "value", value);
+    change_filters(name, "value", value);
   }
 
   const chartConfig = {
@@ -39,13 +47,13 @@ export function BarChartFilter({ name, filters, ...props }) {
     <div>
       <div className="flex flex-row justify-between">
         <div></div>
-        {/* <h1 className="inline-block justify-center text-2xl text-blue-600 dark:text-blue-500">
-          {name[0].toUpperCase() + name.slice(1)}: {filters[name]["value"]}
-        </h1> */}
+        <h1 className="inline-block justify-center text-2xl text-blue-600 dark:text-blue-500">
+          {name[0].toUpperCase() + name.slice(1)}
+        </h1>
 
         <Button
           onClick={() =>
-            props.change_filters(name, "value", filters[name]["filter_empty"])
+            change_filters(name, "value", filters[name]["filter_empty"])
           }
           variant="blue"
           size="lg"
@@ -57,7 +65,7 @@ export function BarChartFilter({ name, filters, ...props }) {
       <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
         <BarChart
           accessibilityLayer
-          data={props.grouped_data}
+          data={chart_data}
           layout="vertical"
           margin={{
             right: 30,

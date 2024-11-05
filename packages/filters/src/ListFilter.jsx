@@ -1,17 +1,15 @@
 import React from "react";
+//context
+import { FilterContext } from "./FilterContext";
+
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
 //MONOREPO PACKAGE IMPORTS
 import { ToggleGroup, ToggleGroupItem } from "@repo/utils/ToggleGroup";
 
-export function ListFilter({
-  filters,
-  change_filters,
-  name,
-  options,
-  ...props
-}) {
+export function ListFilter({ name, options, ...props }) {
+  var { filters, change_filters } = React.useContext(FilterContext);
   //special formData updater function for select comboboxes as input differs from other inputs are objects and multiple items can used
   function handleComboboxChange(name, value) {
     var entries = [];
