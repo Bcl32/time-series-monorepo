@@ -50,7 +50,7 @@ export default function Collection() {
           <div>
             <DialogButton key={"dialog-" + metadata.id}>
               <DialogButton.Button asChild>
-                <Button variant="blue">Edit {object_name}</Button>
+                <Button variant="shine">Edit {object_name}</Button>
               </DialogButton.Button>
 
               <DialogButton.Content title="Edit Entry" variant="grey">

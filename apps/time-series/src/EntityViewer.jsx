@@ -30,7 +30,7 @@ export function EntityViewer({
     ProcessDataset(dataset, filters, ModelData);
 
   //console.log(active_filters, filteredData, datasetStats, filteredStats);
-  console.log(datasetStats);
+  console.log(filters);
   function change_filters(name, key, value) {
     setFilters({
       ...filters, // Copy other fields
@@ -104,7 +104,7 @@ export function EntityViewer({
                   </TabList>
                   <TabPanels className=" overflow-auto">
                     <TabPanel>
-                      <div className="grid xl:grid-cols-2">{charts}</div>
+                      {/* <div className="grid xl:grid-cols-2">{charts}</div> */}
                     </TabPanel>
                     <TabPanel className="h-96">
                       <FiltersSummary

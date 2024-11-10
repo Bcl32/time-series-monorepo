@@ -39,21 +39,16 @@ export function Histogram({ name, chart_data }) {
 
         <Bar dataKey="count" fill="var(--color-count)" radius={4}></Bar>
 
-        {/* <XAxis
-          dataKey="name"
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
-        /> */}
-
         <XAxis dataKey="range" hide />
+        {/* legend for actual bars */}
+
         <XAxis
           dataKey="x0"
           scale="band"
           xAxisId="ticks"
           tickCount={chart_data.length}
         />
+        {/* legend for ticks between bars */}
 
         {/* <XAxis dataKey="count" hide />
         <XAxis

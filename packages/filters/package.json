@@ -28,6 +28,7 @@
     "dayjs": "^1.11.10",
     "@headlessui/react": "2.1.1",
     "@radix-ui/react-toggle-group": "^1.1.0",
+    "@radix-ui/react-slider": "^1.2.1",
     "@mui/icons-material": "^5.15.7",
     "@mui/material": "^5.15.7",
     "@mui/x-date-pickers": "^6.19.3"

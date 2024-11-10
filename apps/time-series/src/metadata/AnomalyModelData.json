@@ -62,7 +62,7 @@
       "editable": true,
       "default": 0,
       "filter": true,
-      "filter_empty": "",
+      "filter_empty": { "min": "", "max": "" },
       "filter_rule": ">"
     },
     {
@@ -72,7 +72,7 @@
       "type": "datetime",
       "title": "Time",
       "editable": true,
-      "default": "2024-11-01T14:37:44.968619",
+      "default": "2024-11-05T19:43:47.041008",
       "filter": true,
       "filter_empty": { "timespan_begin": "", "timespan_end": "" },
       "filter_rule": null
@@ -85,7 +85,7 @@
       "editable": true,
       "default": 0,
       "filter": true,
-      "filter_empty": "",
+      "filter_empty": { "min": "", "max": "" },
       "filter_rule": ">"
     },
     {
@@ -96,7 +96,7 @@
       "editable": true,
       "default": 0,
       "filter": true,
-      "filter_empty": "",
+      "filter_empty": { "min": "", "max": "" },
       "filter_rule": ">"
     },
     {

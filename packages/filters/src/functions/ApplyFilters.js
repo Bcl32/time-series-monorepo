@@ -24,25 +24,32 @@ export function ApplyFilters(data, filters) {
         }
 
       case "number":
-        if (filter["rule"] === "=") {
-          filteredData = filteredData.filter((entry) => {
-            return entry[key] == filter["value"];
-          });
-          break;
-        }
-        if (filter["rule"] === "<") {
-          filteredData = filteredData.filter((entry) => {
-            return entry[key] < parseFloat(filter["value"]);
-          });
-          break;
-        }
-        if (filter["rule"] === ">") {
-          console.log(filter);
-          filteredData = filteredData.filter((entry) => {
-            return entry[key] > parseFloat(filter["value"]);
-          });
-          break;
-        }
+        // if (filter["rule"] === "=") {
+        //   filteredData = filteredData.filter((entry) => {
+        //     return entry[key] == filter["value"];
+        //   });
+        //   break;
+        // }
+        // if (filter["rule"] === "<") {
+        //   filteredData = filteredData.filter((entry) => {
+        //     return entry[key] < parseFloat(filter["value"]);
+        //   });
+        //   break;
+        // }
+        // if (filter["rule"] === ">") {
+        //   console.log(filter);
+        //   filteredData = filteredData.filter((entry) => {
+        //     return entry[key] > parseFloat(filter["value"]);
+        //   });
+        //   break;
+        // }
+        filteredData = filteredData.filter((entry) => {
+          return entry[key] - filter["value"]["min"] >= 0;
+        });
+        filteredData = filteredData.filter((entry) => {
+          return filter["value"]["max"] - entry[key] >= 0;
+        });
+        break;
 
       case "select":
         filteredData = filteredData.filter((entry) => {

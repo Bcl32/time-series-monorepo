@@ -17,6 +17,22 @@ export function InitializeFilters(model_data, datasetStats) {
         filter_start[title]["options"] = item["options"];
       }
 
+      if (item["type"] === "number") {
+        //get the earliest and latest stat objects and assign to filter empty and value for filters
+        var min = datasetStats[title].find((obj) => {
+          return obj.name == "min";
+        })["value"];
+        var max = datasetStats[title].find((obj) => {
+          return obj.name == "max";
+        })["value"];
+
+        filter_start[title]["filter_empty"]["min"] = min;
+        filter_start[title]["value"]["min"] = min;
+
+        filter_start[title]["filter_empty"]["max"] = max;
+        filter_start[title]["value"]["max"] = max;
+      }
+
       if (item["type"] === "datetime") {
         //get the earliest and latest stat objects and assign to filter empty and value for filters
         var earliest = datasetStats[title].find((obj) => {

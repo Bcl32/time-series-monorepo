@@ -17,7 +17,6 @@ export function FiltersSummary(props) {
       </div>
 
       {Object.entries(props.active_filters).map(([key, entry]) => {
-        console.log(key, entry);
         if (entry["type"] === "datetime") {
           var start = props.filters[key]["value"]["timespan_begin"];
           var end = props.filters[key]["value"]["timespan_end"];
@@ -28,7 +27,6 @@ export function FiltersSummary(props) {
             "\n End: " +
             dayjs(end).format("MMM, D YYYY - h:mma");
         } else {
-          console.log(props.filters[key]);
           var filter_value =
             props.filters[key]["rule"] + " " + props.filters[key]["value"];
         }
