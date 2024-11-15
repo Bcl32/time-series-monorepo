@@ -87,8 +87,8 @@ export function EntityViewer({
           <div className="col-span-7">
             {dataset.length == 0 && <div>No {name} found.</div>}
             {dataset.length >= 1 && (
-              <div>
-                <h1 className="text-2xl">
+              <div className="bg-card">
+                <h1 className="text-2xl bg-gradient">
                   {name}: {filteredData.length} / {dataset.length} (
                   {((filteredData.length / dataset.length) * 100).toFixed(2)}
                   %)
@@ -104,7 +104,7 @@ export function EntityViewer({
                   </TabList>
                   <TabPanels className=" overflow-auto">
                     <TabPanel>
-                      {/* <div className="grid xl:grid-cols-2">{charts}</div> */}
+                      <div className="grid xl:grid-cols-2">{charts}</div>
                     </TabPanel>
                     <TabPanel className="h-96">
                       <FiltersSummary

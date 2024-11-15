@@ -23,18 +23,6 @@ export function AddModelForm(props) {
 
   const [formData, setFormData] = React.useState(form_defaults);
 
-  //used to update formData
-  function handleChange(event) {
-    console.log(event);
-    var { name, value, type, checked } = event.target;
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
-  }
-
   //special formData updater function for datetime as event.target doesn't work with datetimepicker
   function change_datetime(value, name) {
     setFormData((prevFormData) => {
@@ -69,7 +57,6 @@ export function AddModelForm(props) {
               <FormElement
                 key={entry.name}
                 entry_data={entry}
-                handleChange={handleChange}
                 change_datetime={change_datetime}
                 formData={formData}
                 setFormData={setFormData}

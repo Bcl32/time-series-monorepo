@@ -39,7 +39,7 @@ export default function Health() {
           <div>
             <DialogButton key={"dialog-" + metadata.id}>
               <DialogButton.Button asChild>
-                <Button variant="blue">Edit {object_name}</Button>
+                <Button variant="default">Edit {object_name}</Button>
               </DialogButton.Button>
 
               <DialogButton.Content title="Edit Entry" variant="grey">

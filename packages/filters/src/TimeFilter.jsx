@@ -90,7 +90,7 @@ export function TimeFilter({ name, ...props }) {
             </DialogButton.Content>
           </DialogButton>
 
-          <Button onClick={reset_value} variant="blue" size="lg">
+          <Button onClick={reset_value} variant="default" size="lg">
             Reset
           </Button>
         </div>

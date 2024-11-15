@@ -9,6 +9,7 @@ dayjs.extend(timezone);
 
 //my package imports
 import { useDatabaseMutation } from "@repo/hooks/useDatabaseMutation";
+import { Button } from "@repo/utils/Button";
 
 //my custom components
 import { FormElement } from "./FormElement";
@@ -20,18 +21,6 @@ export function EditModelForm({
   ...props
 }) {
   const [formData, setFormData] = React.useState(obj_data);
-
-  //used to update formData
-  function handleChange(event) {
-    console.log(event);
-    var { name, value, type, checked } = event.target;
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
-  }
 
   //special formData updater function for datetime as event.target doesn't work with datetimepicker
   function change_datetime(value, name) {
@@ -59,31 +48,25 @@ export function EditModelForm({
   );
   return (
     <div>
-      <form>
-        {ModelData.model_attributes.map((entry) => {
-          if (entry["editable"]) {
-            return (
-              <FormElement
-                key={entry.name}
-                entry_data={entry}
-                handleChange={handleChange}
-                change_datetime={change_datetime}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            );
-          } else {
-            return null;
-          }
-        })}
-      </form>
+      {ModelData.model_attributes.map((entry) => {
+        if (entry["editable"]) {
+          return (
+            <FormElement
+              key={entry.name}
+              entry_data={entry}
+              change_datetime={change_datetime}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          );
+        } else {
+          return null;
+        }
+      })}
 
-      <button
-        onClick={update_entry}
-        className="text-white bg-green-700 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
+      <Button variant="default" onClick={update_entry}>
         Update
-      </button>
+      </Button>
 
       {mutation_update_entry.isLoading && "Editing Entry..."}
       {mutation_update_entry.isError && (

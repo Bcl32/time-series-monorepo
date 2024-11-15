@@ -37,7 +37,7 @@ function ModalContent({ title, children, className, variant, size, ...props }) {
         <Dialog.DialogDescription></Dialog.DialogDescription>
         <div className="flex items-center justify-between">
           <Dialog.Title className="text-xl">{title}</Dialog.Title>
-          <Dialog.Close className="text-gray-400 hover:text-gray-500">
+          <Dialog.Close className="text-primary-foreground hover:text-accent">
             <CloseIcon />
           </Dialog.Close>
         </div>
@@ -53,7 +53,7 @@ const contentVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white text-gray-800",
+        default: "bg-muted text-primary-foreground",
         grey: "bg-gray-200 text-gray-800",
         red: "bg-red-200 text-red-800",
         danger: "bg-red-700 text-white",

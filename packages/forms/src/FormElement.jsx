@@ -7,6 +7,10 @@ import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+import { Input } from "@repo/utils/Input";
+import { Label } from "@repo/utils/Label";
+import { Checkbox } from "@repo/utils/Checkbox";
+
 // mui x
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -21,11 +25,21 @@ export function FormElement({
   entry_data,
   formData,
   setFormData,
-  handleChange,
   change_datetime,
 }) {
   var name = entry_data.name;
   var type = entry_data.type;
+
+  //used to update formData
+  function handleChange(event) {
+    var { name, value } = event.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  }
 
   //special formData updater function for select comboboxes as input differs from other inputs are objects and multiple items can used
   function handleComboboxChange(attribute, value) {
@@ -48,24 +62,31 @@ export function FormElement({
     });
   }
 
+  function handleCheckboxChange(value) {
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  }
+
   switch (type) {
     case "string":
       return (
         <div className="flex">
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              {/* capitalizes the string */}
-              {name[0].toUpperCase() + name.slice(1)}:
-            </label>
-            <input
+            <Label> {name[0].toUpperCase() + name.slice(1)}:</Label>
+            <Input
+              variant="default"
+              size="default"
               id={"input_" + name}
               name={name}
               value={formData[name]}
               onChange={handleChange}
               type="text"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder=""
-            />
+            ></Input>
           </div>
         </div>
       );
@@ -73,42 +94,39 @@ export function FormElement({
       return (
         <div className="flex">
           <div className="w-48">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              {/* capitalizes the string */}
-              {name[0].toUpperCase() + name.slice(1)}:
-            </label>
-            <input
+            <Label> {name[0].toUpperCase() + name.slice(1)}:</Label>
+            <Input
+              variant="default"
+              size="lg"
+              id={"input_" + name}
               name={name}
               value={formData[name]}
               onChange={handleChange}
-              id={"input_" + name}
               type="number"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder=""
-            />
+            ></Input>
           </div>
         </div>
       );
 
     case "boolean":
+      console.log(formData[name]);
       return (
-        <div className="flex col-2">
-          <input
+        <div className="flex items-center space-x-3 col-2">
+          <Checkbox
             name={name}
-            onChange={handleChange}
+            checked={formData[name]}
+            onCheckedChange={(checked) => {
+              handleCheckboxChange(checked);
+            }}
+            className="w-6 h-6 border-2"
             id={"input_" + name}
             type="checkbox"
-            checked={formData[name]}
             value={formData[name]}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          ></input>
-          <label
-            htmlFor="missing_values-checkbox"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            {/* capitalizes the string */}
-            {name[0].toUpperCase() + name.slice(1)}:
-          </label>
+          />
+          <Label className="text-lg leading-none" htmlFor={"input_" + name}>
+            {name[0].toUpperCase() + name.slice(1)}
+          </Label>
         </div>
       );
 

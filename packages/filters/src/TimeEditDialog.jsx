@@ -164,7 +164,7 @@ function TimeEditDialog({
 
       <Button
         onClick={() => change_timespans(dayjs().subtract(1, "d"))}
-        variant="blue"
+        variant="default"
         size="lg"
       >
         Past Day
@@ -172,7 +172,7 @@ function TimeEditDialog({
 
       <Button
         onClick={() => change_timespans(dayjs().subtract(1, "w"))}
-        variant="blue"
+        variant="default"
         size="lg"
       >
         Past Week
@@ -180,7 +180,7 @@ function TimeEditDialog({
 
       <Button
         onClick={() => change_timespans(dayjs().subtract(1, "M"))}
-        variant="blue"
+        variant="default"
         size="lg"
       >
         Past Month
@@ -188,7 +188,7 @@ function TimeEditDialog({
 
       <Button
         onClick={() => change_timespans(dayjs().subtract(1, "y"))}
-        variant="blue"
+        variant="default"
         size="lg"
       >
         <p>Past Year</p>

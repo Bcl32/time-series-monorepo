@@ -6,7 +6,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ModelData from "../../metadata/DetectorModelData.json";
 //MONOREPO PACKAGE IMPORTS
 import { ColumnGenerator } from "@repo/datatable/ColumnGenerator";
-import { Tooltip } from "@repo/utils/Tooltip";
+import { CustomTooltip } from "@repo/utils/Tooltip";
 
 export function DetectorsTableData({
   query_invalidation,
@@ -44,11 +44,11 @@ export function DetectorsTableData({
       size: 250, //set column size for this column
       cell: ({ cell, row }) => {
         return (
-          <Tooltip delayDuration={400} content={row.original.description}>
+          <CustomTooltip delayDuration={400} content={row.original.description}>
             <span className="text-md line-clamp-4 h-24">
               {row.original.description}
             </span>
-          </Tooltip>
+          </CustomTooltip>
         );
       },
     }),

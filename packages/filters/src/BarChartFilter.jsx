@@ -55,7 +55,7 @@ export function BarChartFilter({ name, chart_data }) {
           onClick={() =>
             change_filters(name, "value", filters[name]["filter_empty"])
           }
-          variant="blue"
+          variant="default"
           size="lg"
         >
           Reset

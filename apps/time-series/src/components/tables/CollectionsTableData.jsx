@@ -7,7 +7,7 @@ import ModelData from "../../metadata/CollectionModelData.json";
 //MONOREPO PACKAGE IMPORTS
 import { ColumnGenerator } from "@repo/datatable/ColumnGenerator";
 
-import { Tooltip } from "@repo/utils/Tooltip";
+import { CustomTooltip } from "@repo/utils/Tooltip";
 
 export function CollectionsTableData({
   query_invalidation,
@@ -51,11 +51,11 @@ export function CollectionsTableData({
       size: 250, //set column size for this column
       cell: ({ cell, row }) => {
         return (
-          <Tooltip delayDuration={400} content={row.original.description}>
+          <CustomTooltip delayDuration={400} content={row.original.description}>
             <span className="text-sm line-clamp-2 h-10">
               {row.original.description}
             </span>
-          </Tooltip>
+          </CustomTooltip>
         );
       },
     }),

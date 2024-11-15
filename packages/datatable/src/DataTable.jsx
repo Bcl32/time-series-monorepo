@@ -32,7 +32,6 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import DeleteIcon from "@mui/icons-material/Delete";
-import "./styles/table_styles.css";
 import { DataTablePagination } from "./TablePagination";
 
 //MONOREPO PACKAGE IMPORTS

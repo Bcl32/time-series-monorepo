@@ -143,7 +143,7 @@ function DebouncedNumberFilter({ name, ...props }) {
         </label>
       </div>
 
-      <Button onClick={reset_value} variant="blue" size="lg">
+      <Button onClick={reset_value} variant="default" size="lg">
         Reset
       </Button>
     </div>

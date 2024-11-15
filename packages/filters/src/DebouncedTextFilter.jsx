@@ -51,7 +51,8 @@ function DebouncedTextFilter({ name, ...props }) {
         value={inputValue}
         onChange={handleInputChange}
         type="text"
-        className="flex-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+        //className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         placeholder=""
       />
 
@@ -68,7 +69,7 @@ function DebouncedTextFilter({ name, ...props }) {
         <ToggleGroupItem value="equals">{"equals"}</ToggleGroupItem>
       </ToggleGroup>
 
-      <Button onClick={reset_value} variant="blue" size="lg">
+      <Button onClick={reset_value} variant="default" size="lg">
         Reset
       </Button>
     </div>

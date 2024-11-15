@@ -59,7 +59,8 @@ services:
     working_dir: /app/apps/time-series
     entrypoint: ["yarn", "dev"]
     volumes: #these volumes enable hot reload for file changes
-      - ./apps/time-series/src:/app/apps/time-series/src #source code for current project
+      #- ./apps/time-series/src:/app/apps/time-series/src #source code for current project
+      - ./apps/time-series:/app/apps/time-series #all code for current project
       - ./packages:/app/packages #shared turborepo packages
     tty: true
 

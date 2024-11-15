@@ -1,0 +1,129 @@
+/* Not currently used, but kept if new CSS variable styling is needed instead of tailwinds colours config */
+@layer base {
+  .light {
+    --background: 229 57% 100%;
+    --foreground: 229 63% 4%;
+    --muted: 229 12% 86%;
+    --muted-foreground: 229 10% 37%;
+    --popover: 0 0% 99%;
+    --popover-foreground: 229 63% 3%;
+    --card: 0 0% 99%;
+    --card-foreground: 229 63% 3%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --primary: 229 100% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 229 20% 90%;
+    --secondary-foreground: 229 20% 30%;
+    --accent: 229 28% 85%;
+    --accent-foreground: 229 28% 25%;
+    --destructive: 3 100% 50%;
+    --destructive-foreground: 3 0% 100%;
+    --ring: 229 100% 62%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 229 41% 4%;
+    --foreground: 229 23% 99%;
+    --muted: 229 12% 14%;
+    --muted-foreground: 229 10% 63%;
+    --popover: 229 41% 5%;
+    --popover-foreground: 0 0% 100%;
+    --card: 229 41% 5%;
+    --card-foreground: 0 0% 100%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --primary: 229 100% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 229 14% 8%;
+    --secondary-foreground: 229 14% 68%;
+    --accent: 229 23% 17%;
+    --accent-foreground: 229 23% 77%;
+    --destructive: 3 89% 54%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 229 100% 62%;
+  }
+
+  .green {
+    --background: 155 30% 0%;
+    --foreground: 155 29% 98%;
+    --muted: 155 5% 5%;
+    --muted-foreground: 155 8% 67%;
+    --popover: 155 30% 0%;
+    --popover-foreground: 155 29% 98%;
+    --card: 155 30% 0%;
+    --card-foreground: 155 29% 98%;
+    --border: 155 13% 15%;
+    --input: 155 13% 15%;
+    --primary: 155 58% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 155 10% 18%;
+    --secondary-foreground: 155 10% 78%;
+    --accent: 155 19% 25%;
+    --accent-foreground: 155 19% 85%;
+    --destructive: 8 87% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 155 58% 29%;
+  }
+
+  .dark-green {
+    --background: 155 30% 0%;
+    --foreground: 155 29% 98%;
+    --muted: 155 5% 5%;
+    --muted-foreground: 155 8% 67%;
+    --popover: 155 30% 0%;
+    --popover-foreground: 155 29% 98%;
+    --card: 155 30% 0%;
+    --card-foreground: 155 29% 98%;
+    --border: 155 13% 15%;
+    --input: 155 13% 15%;
+    --primary: 155 58% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 155 10% 18%;
+    --secondary-foreground: 155 10% 78%;
+    --accent: 155 19% 25%;
+    --accent-foreground: 155 19% 85%;
+    --destructive: 8 87% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 155 58% 29%;
+  }
+
+  .dark-blue {
+    /* Name: custom color palette
+               Author: Ilias Ism
+               URL: https://gradient.page */
+
+    /* CSS: .bg-gradient { background: var(--gradient) } */
+    --gradient: linear-gradient(to top left, #22e1ff, #1d8fe1, #625eb1);
+
+    --background: 200 65% 4.56%;
+    --foreground: 200 10% 97.85%;
+
+    --muted: 200 50% 17.099999999999998%;
+    --muted-foreground: 200 10% 55.7%;
+
+    --popover: 200 45% 7.409999999999999%;
+    --popover-foreground: 200 10% 97.85%;
+
+    --card: 200 45% 7.409999999999999%;
+    --card-foreground: 200 10% 97.85%;
+
+    --border: 200 50% 17.099999999999998%;
+    --input: 200 50% 17.099999999999998%;
+
+    --primary: 200 100% 57%;
+    --primary-foreground: 200 10% 5.699999999999999%;
+
+    --secondary: 200 50% 17.099999999999998%;
+    --secondary-foreground: 200 10% 97.85%;
+
+    --accent: 200 50% 17.099999999999998%;
+    --accent-foreground: 200 10% 97.85%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 200 10% 97.85%;
+
+    --ring: 200 100% 57%;
+  }
+}

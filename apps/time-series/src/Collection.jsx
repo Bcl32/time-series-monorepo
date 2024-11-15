@@ -53,7 +53,7 @@ export default function Collection() {
                 <Button variant="shine">Edit {object_name}</Button>
               </DialogButton.Button>
 
-              <DialogButton.Content title="Edit Entry" variant="grey">
+              <DialogButton.Content title="Edit Entry" variant="default">
                 <EditModelForm
                   key={"entryform_edit_data_entry"}
                   ModelData={CollectionModelData}

@@ -4,6 +4,12 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 //my custom functions
 import { cn } from "../functions/cn";
 
+const TooltipProvider = TooltipPrimitive.Provider;
+
+const Tooltip = TooltipPrimitive.Root;
+
+const TooltipTrigger = TooltipPrimitive.Trigger;
+
 const TooltipContent = React.forwardRef(
   ({ className, sideOffset = 4, ...props }, ref) => (
     <TooltipPrimitive.Content
@@ -19,7 +25,8 @@ const TooltipContent = React.forwardRef(
 );
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-export function Tooltip({
+/*custom tootip structure different than default Tooltip that is exported for compatiblity with other components */
+function CustomTooltip({
   children,
   content,
   open,
@@ -45,3 +52,11 @@ export function Tooltip({
     </TooltipPrimitive.Provider>
   );
 }
+
+export {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+  CustomTooltip,
+};

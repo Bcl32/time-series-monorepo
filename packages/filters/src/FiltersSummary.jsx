@@ -11,7 +11,7 @@ export function FiltersSummary(props) {
   return (
     <div>
       <div>
-        <h1 className="text-2xl text-blue-600 dark:text-blue-500">
+        <h1 className="text-2xl text-primary dark:text-blue-500">
           Active Filters:
         </h1>
       </div>
@@ -61,7 +61,7 @@ function FiltersEntry({ name, entry, filters, filter_value, change_filters }) {
         onClick={() =>
           change_filters(name, "value", filters[name]["filter_empty"])
         }
-        variant="blue"
+        variant="default"
         size="lg"
         className="col-span-2"
       >
