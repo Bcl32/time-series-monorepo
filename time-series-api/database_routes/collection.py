@@ -13,6 +13,7 @@ log.debug("Logging is configured.")
 from database import db_models
 from my_db.dependencies import get_repository
 from my_db.repository import DatabaseRepository
+from database.build_object_heirarchy import build_object_heirarchy
 
 router = APIRouter(prefix="/collection", tags=["collection"])
 
@@ -63,14 +64,18 @@ async def get_by_column(repository: ModelRepository, column: str, value: list[st
 
 # GET BY ID
 @router.get("/get_by_id/{id}", status_code=status.HTTP_200_OK)
-async def get_by_id(id: uuid.UUID, repository: ModelRepository)-> MODEL:
+async def get_by_id(id: uuid.UUID, repository: ModelRepository):
     db_object = await repository.get(id)
     if db_object is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=MODEL_NAME+" does not exist",
         )
-    return MODEL.model_validate(db_object)
+
+    obj_heirarchy=build_object_heirarchy(db_object=db_object, base_object=PAYLOAD_MODEL.model_validate(db_object), inheritance_chain=[])
+    metadata=MODEL.model_validate(db_object)
+    response ={"metadata":metadata, "obj_heirarchy":obj_heirarchy}
+    return response
 
 # UPDATE
 @router.post("/update", status_code=status.HTTP_200_OK)

@@ -4,7 +4,6 @@ import React from "react";
 //MONOREPO PACKAGE IMPORTS
 import { useGetRequest } from "@repo/hooks/useGetRequest";
 
-import { setTitleText } from "@repo/utils/setTitleText";
 //LOCAL COMPONENTS
 import { DatasetsTableData } from "./components/tables/DatasetsTableData";
 import NavigationBreadcrumb from "./NavigationBreadcrumb";
@@ -20,7 +19,7 @@ export default function AllDatasets() {
     var dataset = getResponse.data; //runs every state update
     var breadcrumb = [];
   }
-  setTitleText("All Datasets");
+
   var table_metadata = DatasetsTableData({
     add_api_url: "/fastapi/datafeed/create",
     query_invalidation: [get_api_url],

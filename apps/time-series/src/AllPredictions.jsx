@@ -4,7 +4,6 @@ import React from "react";
 //MONOREPO PACKAGE IMPORTS
 import { useGetRequest } from "@repo/hooks/useGetRequest";
 
-import { setTitleText } from "@repo/utils/setTitleText";
 //LOCAL COMPONENTS
 import { PredictionsTableData } from "./components/tables/PredictionsTableData";
 import NavigationBreadcrumb from "./NavigationBreadcrumb";
@@ -20,7 +19,7 @@ export default function AllPredictions() {
     var dataset = getResponse.data; //runs every state update
     var breadcrumb = [];
   }
-  setTitleText("All Predictions");
+
   var table_metadata = PredictionsTableData({
     add_api_url: "n/a",
     query_invalidation: [get_api_url],

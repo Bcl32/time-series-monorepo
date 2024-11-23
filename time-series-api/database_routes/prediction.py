@@ -15,6 +15,7 @@ from data_loader import load_csv_file
 from database import db_models
 from my_db.dependencies import get_repository
 from my_db.repository import DatabaseRepository
+from database.build_object_heirarchy import build_object_heirarchy
 
 from schemas import prediction_schema, anomaly_schema
 
@@ -167,34 +168,22 @@ async def load_prediction_file(
     id: uuid.UUID,
      repository: ModelRepository,
 ):
-    prediction_obj = await repository.get(id)
-    if prediction_obj is None:
+    db_object = await repository.get(id)
+    if db_object is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=MODEL_NAME+" does not exist",
         )
 
-    folder = prediction_obj.dataset.folder
-    filename = prediction_obj.dataset.filename
-    dataset_filepath= Path(config.NAB_ASSETS / "predictions" / prediction_obj.detector_name) / folder / Path(prediction_obj.detector_name+"_"+filename)
+    folder = db_object.dataset.folder
+    filename = db_object.dataset.filename
+    dataset_filepath= Path(config.NAB_ASSETS / "predictions" / db_object.detector_name) / folder / Path(db_object.detector_name+"_"+filename)
     log.debug((dataset_filepath))
     entries = load_csv_file(dataset_filepath,Prediction_Entry)
 
-    prediction_model=MODEL.model_validate(prediction_obj)
 
-    breadcrumb=build_breadcrumb(prediction_obj,prediction_model)
-  
-    response ={"metadata":prediction_model, "entries":entries, "breadcrumb":breadcrumb}
+    obj_heirarchy=build_object_heirarchy(db_object=db_object, base_object=PAYLOAD_MODEL.model_validate(db_object), inheritance_chain=["dataset","datafeed","collection"])
+    metadata=MODEL.model_validate(db_object)
+
+    response ={"metadata":metadata, "entries":entries, "obj_heirarchy":obj_heirarchy}
     return response
-
-def build_breadcrumb(prediction,model):
-    #uses raw prediction_obj for the parent data and the validated model for the prediction data, can't use prediction object as it causes an infinite loop
-    dataset=prediction.dataset
-    datafeed=dataset.datafeed
-    collection=datafeed.collection
-    breadcrumb=[]
-    breadcrumb.append({ "type": "Collection", "object": collection, "id": collection.id, "name": collection.name })
-    breadcrumb.append({ "type": "Datafeed", "object": datafeed, "id": datafeed.id, "name": datafeed.name })
-    breadcrumb.append({ "type": "Dataset", "object": dataset, "id": dataset.id, "name": dataset.filename })
-    breadcrumb.append({ "type": "Prediction", "object": model, "id": prediction.id, "name": prediction.detector_name })
-    return breadcrumb

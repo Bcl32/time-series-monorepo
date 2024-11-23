@@ -2,21 +2,10 @@
   "chart_filters": [
     { "name": "detector_name", "type": "bar", "key": "count" },
     { "name": "anomaly_score", "type": "histogram", "key": "bins" },
-    { "name": "threshold", "type": "histogram", "key": "bins" },
-    { "name": "value", "type": "histogram", "key": "bins" },
-    { "name": "status", "type": "pie", "key": "count" },
-    { "name": "severity", "type": "pie", "key": "count" },
     { "name": "time", "type": "line", "key": "monthly" },
-    { "name": "tags", "type": "bar", "key": "count" },
     {
       "name": "time",
       "type": "stacked_bar",
-      "key": "monthly-severity",
-      "subkey": "severity"
-    },
-    {
-      "name": "time",
-      "type": "bar-switcher",
       "key": "monthly-severity",
       "subkey": "severity"
     }

@@ -4,7 +4,6 @@ import React from "react";
 //MONOREPO PACKAGE IMPORTS
 import { useGetRequest } from "@repo/hooks/useGetRequest";
 
-import { setTitleText } from "@repo/utils/setTitleText";
 //LOCAL COMPONENTS
 import { DetectorsTableData } from "./components/tables/DetectorsTableData";
 import NavigationBreadcrumb from "./NavigationBreadcrumb";
@@ -20,7 +19,7 @@ export default function AllDetectors() {
     var dataset = getResponse.data; //runs every state update
     var breadcrumb = [];
   }
-  setTitleText("All Detectors");
+
   var table_metadata = DetectorsTableData({
     add_api_url: MainModelData.add_api_url,
     query_invalidation: [get_api_url],

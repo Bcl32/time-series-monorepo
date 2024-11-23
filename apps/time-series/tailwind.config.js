@@ -49,7 +49,7 @@ export default {
           "chart-5": "hsl(212 97% 87%)",
           "sidebar-background": "hsl(0 0% 98%)",
           "sidebar-foreground": "hsl(240 5.3% 26.1%)",
-          "sidebar-primary": "hsl(240 5.9% 10%)",
+          "sidebar-primary": "hsl(0 5.9% 10%)",
           "sidebar-primary-foreground": "hsl(0 0% 98%)",
           "sidebar-accent": "hsl(240 4.8% 95.9%)",
           "sidebar-accent-foreground": "hsl(240 5.9% 10%)",
@@ -115,6 +115,14 @@ export default {
           "chart-3": "hsl(142 88% 28%)",
           "chart-4": "hsl(137 55% 15%)",
           "chart-5": "hsl(141 40% 9%)",
+          "sidebar-background": "hsl(155 36% 100%)",
+          "sidebar-foreground": "hsl(155 71% 1%)",
+          "sidebar-primary": "hsl(155 58% 29%)",
+          "sidebar-primary-foreground": "hsl(0 0% 100%)",
+          "sidebar-accent": "hsl(155 23% 71%)",
+          "sidebar-accent-foreground": "hsl(155 23% 11%)",
+          "sidebar-border": "hsl(155 13% 90%)",
+          "sidebar-ring": "hsl(155 58% 29%)",
         },
         "dark-green": {
           background: "hsl(155 30% 0%)",
@@ -141,15 +149,16 @@ export default {
           "chart-3": "hsl(142 88% 28%)",
           "chart-4": "hsl(137 55% 15%)",
           "chart-5": "hsl(141 40% 9%)",
+          "sidebar-background": "hsl(155 30% 0%)",
+          "sidebar-foreground": "hsl(155 29% 98%)",
+          "sidebar-primary": "hsl(155 58% 29%)",
+          "sidebar-primary-foreground": "hsl(0 0% 100%)",
+          "sidebar-accent": "hsl(155 19% 25%)",
+          "sidebar-accent-foreground": "hsl(155 19% 85%)",
+          "sidebar-border": "hsl(155 13% 15%)",
+          "sidebar-ring": "hsl(155 58% 29%)",
         },
-
         "dark-blue": {
-          /* Name: custom color palette
-             Author: Ilias Ism
-             URL: https://gradient.page */
-
-          /* CSS: .bg-gradient { background: var(--gradient) } */
-          gradient: "linear-gradient(to top left,#22E1FF,#1D8FE1,#625EB1)",
           background: "hsl(200 65% 4%)",
           foreground: "hsl(200 10% 97%)",
           muted: "hsl(200 50% 17%)",
@@ -174,6 +183,14 @@ export default {
           "chart-3": "hsl(216 92% 60%)",
           "chart-4": "hsl(210 98% 78%)",
           "chart-5": "hsl(212 97% 87%)",
+          "sidebar-background": "hsl(200 45% 7%)",
+          "sidebar-foreground": "hsl(200 10% 97%)",
+          "sidebar-primary": "hsl(200 100% 57%)",
+          "sidebar-primary-foreground": "hsl(200 10% 5%)",
+          "sidebar-accent": "hsl(200 50% 17%)",
+          "sidebar-accent-foreground": "hsl(200 10% 97%)",
+          "sidebar-border": "hsl(200 50% 17%)",
+          "sidebar-ring": "hsl(224.3 76.3% 48%)",
         },
       },
       {

@@ -4,8 +4,6 @@ import React from "react";
 //MONOREPO PACKAGE IMPORTS
 import { useGetRequest } from "@repo/hooks/useGetRequest";
 
-import { setTitleText } from "@repo/utils/setTitleText";
-
 //LOCAL COMPONENTS
 
 import { CollectionsTableData } from "./components/tables/CollectionsTableData";
@@ -25,7 +23,6 @@ export default function AllCollections() {
     var breadcrumb = [];
   }
 
-  setTitleText("All Collections");
   var table_metadata = CollectionsTableData({
     add_api_url: MainModelData.add_api_url,
     query_invalidation: [get_api_url],

@@ -1,44 +1,34 @@
 //THIRD PARTY LIBRARIES
-import React from "react";
 import { useLocation } from "react-router-dom";
-
 //MONOREPO PACKAGE IMPORTS
 import { useGetRequest } from "@repo/hooks/useGetRequest";
-import { Button } from "@repo/utils/Button";
-import { PrintState } from "@repo/utils/PrintState";
-import { setTitleText } from "@repo/utils/setTitleText";
-import { Capitalize } from "@repo/utils/StringFunctions";
-import { EditModelForm } from "@repo/forms/EditModelForm";
-import { DialogButton } from "@repo/utils/DialogButton";
+
 //LOCAL COMPONENTS
-import { DatafeedsTableData } from "./components/tables/DatafeedsTableData";
-import Metadata from "./Metadata";
 import NavigationBreadcrumb from "./NavigationBreadcrumb";
+import Metadata from "./Metadata";
 import EntityViewer from "./EntityViewer";
-//my component data
-import CollectionModelData from "./metadata/CollectionModelData.json";
-import DatafeedModelData from "./metadata/DatafeedModelData.json";
+
+//MODEL SPECIFIC IMPORTS
+import { DatafeedsTableData as ChildTableData } from "./components/tables/DatafeedsTableData";
+import MainModelData from "./metadata/CollectionModelData.json";
+import ChildModelData from "./metadata/DatafeedModelData.json";
 
 export default function Collection() {
-  var object_name = "Collection";
+  const child_attr_name = "datafeeds";
+  const children_attributes = [];
   const { state } = useLocation();
-  const collection_id = state?.object_id;
+  const get_api_url =
+    MainModelData.api_url_base + "/get_by_id" + "/" + state?.object_id;
 
-  const get_api_url = "/fastapi/collection/get_by_id" + "/" + collection_id;
   const getResponse = useGetRequest(get_api_url);
 
   if (getResponse.isSuccess) {
-    var metadata = getResponse.data;
-    var dataset = getResponse.data["datafeeds"];
-
-    var breadCrumb = [
-      // { type: "Collection", id: metadata.id, name: metadata.name },
-    ];
-
-    setTitleText(object_name + Capitalize(metadata.name));
+    var metadata = getResponse.data.metadata;
+    var obj_heirarchy = getResponse.data.obj_heirarchy;
+    var dataset = metadata[child_attr_name];
   }
-  var table_metadata = DatafeedsTableData({
-    add_api_url: "/fastapi/datafeed/create/" + collection_id,
+  var table_metadata = ChildTableData({
+    add_api_url: ChildModelData.api_url_base + "/create/" + state?.object_id,
     query_invalidation: [get_api_url],
   });
 
@@ -46,37 +36,24 @@ export default function Collection() {
     <div>
       {getResponse.isSuccess && (
         <div>
-          <NavigationBreadcrumb data={breadCrumb} />
-          <div>
-            <DialogButton key={"dialog-" + metadata.id}>
-              <DialogButton.Button asChild>
-                <Button variant="shine">Edit {object_name}</Button>
-              </DialogButton.Button>
+          <NavigationBreadcrumb data={obj_heirarchy} />
 
-              <DialogButton.Content title="Edit Entry" variant="default">
-                <EditModelForm
-                  key={"entryform_edit_data_entry"}
-                  ModelData={CollectionModelData}
-                  query_invalidation={[get_api_url]}
-                  obj_data={metadata}
-                />
-              </DialogButton.Content>
-            </DialogButton>
-          </div>
           <div className="grid xl:grid-cols-12">
             <div className="col-span-6">
               <Metadata
-                ModelData={CollectionModelData.model_attributes}
-                metadata={metadata}
-                children_attributes={[]}
+                model_metadata={MainModelData}
+                object_data={metadata}
+                obj_heirarchy={obj_heirarchy}
+                query_invalidation={[get_api_url]}
+                children_attributes={children_attributes}
                 parent_name=""
               />
             </div>
           </div>
           <EntityViewer
-            name={"Datafeeds"}
+            name={child_attr_name}
             dataset={dataset}
-            ModelData={DatafeedModelData}
+            ModelData={ChildModelData}
             table_config={table_metadata}
           ></EntityViewer>
         </div>

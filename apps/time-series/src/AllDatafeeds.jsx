@@ -3,7 +3,6 @@ import React from "react";
 
 //MONOREPO PACKAGE IMPORTS
 import { useGetRequest } from "@repo/hooks/useGetRequest";
-import { setTitleText } from "@repo/utils/setTitleText";
 
 //LOCAL COMPONENTS
 import { DatafeedsTableData } from "./components/tables/DatafeedsTableData";
@@ -21,7 +20,6 @@ export default function AllDatafeeds() {
     var breadcrumb = [];
   }
 
-  setTitleText("All Datafeeds");
   var table_metadata = DatafeedsTableData({
     add_api_url: "/fastapi/datafeed/create",
     query_invalidation: [get_api_url],

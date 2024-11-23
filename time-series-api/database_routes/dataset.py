@@ -13,6 +13,7 @@ log.debug("Logging is configured.")
 from database import db_models
 from my_db.dependencies import get_repository
 from my_db.repository import DatabaseRepository
+from database.build_object_heirarchy import build_object_heirarchy
 
 router = APIRouter(prefix="/dataset", tags=["dataset"])
 
@@ -102,10 +103,10 @@ async def get_by_id(id: uuid.UUID, repository: ModelRepository):
             detail=MODEL_NAME+" does not exist",
         )
     
-    breadcrumb=build_breadcrumb(db_object)
+    obj_heirarchy=build_object_heirarchy(db_object=db_object, base_object=PAYLOAD_MODEL.model_validate(db_object), inheritance_chain=["datafeed","collection"])
     dataset_metadata=MODEL.model_validate(db_object)
   
-    response ={"metadata":dataset_metadata, "breadcrumb":breadcrumb}
+    response ={"metadata":dataset_metadata, "obj_heirarchy":obj_heirarchy}
     return response
 
 
@@ -129,13 +130,3 @@ async def delete(
 ) -> int:
     rows = await repository.delete(column=column,value=value)
     return rows
-
-def build_breadcrumb(dataset):
-    dataset_obj=dataset_schema.Dataset_Base.model_validate(dataset)
-    datafeed=dataset.datafeed
-    collection=datafeed.collection
-    breadcrumb=[]
-    breadcrumb.append({ "type": "Collection", "object": collection, "id": collection.id, "name": collection.name })
-    breadcrumb.append({ "type": "Datafeed", "object": datafeed, "id": datafeed.id, "name": datafeed.name })
-    breadcrumb.append({ "type": "Dataset", "object": dataset_obj, "id": dataset.id, "name": dataset.filename })
-    return breadcrumb

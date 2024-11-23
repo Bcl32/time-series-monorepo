@@ -1,1 +1,79 @@
-{"model_name": "Collection", "chart_filters": [], "get_api_url": "/fastapi/collection/get_all", "add_api_url": "/fastapi/collection/create", "delete_api_url": "/fastapi/collection/delete?column=id", "update_api_url": "/fastapi/collection/update", "model_attributes": [{"name": "id", "source": "db", "type": "id", "title": "Id", "editable": false, "filter": false}, {"name": "time_created", "source": "db", "type": "datetime", "title": "Time Created", "editable": false, "filter": true, "filter_empty": {"timespan_begin": "", "timespan_end": ""}, "filter_rule": null}, {"name": "time_updated", "source": "db", "type": "datetime", "title": "Time Updated", "editable": false, "filter": true, "filter_empty": {"timespan_begin": "", "timespan_end": ""}, "filter_rule": null}, {"name": "name", "source": "main", "type": "string", "title": "Name", "editable": true, "filter": true, "filter_empty": "", "filter_rule": "equals"}, {"name": "description", "source": "main", "type": "string", "title": "Description", "editable": true, "filter": true, "filter_empty": "", "filter_rule": "equals"}, {"name": "tags", "source": "main", "type": "list", "title": "Tags", "options": [], "editable": true, "default": [], "filter": true, "filter_empty": [], "filter_rule": "any"}, {"name": "datafeeds", "source": "main", "type": "children", "title": "Datafeeds", "editable": true, "filter": false}]}
+{
+  "model_name": "Collection",
+  "chart_filters": [],
+  "api_url_base": "/fastapi/collection/",
+  "get_api_url": "/fastapi/collection/get_all",
+  "add_api_url": "/fastapi/collection/create",
+  "delete_api_url": "/fastapi/collection/delete?column=id",
+  "update_api_url": "/fastapi/collection/update",
+  "model_attributes": [
+    {
+      "name": "id",
+      "source": "db",
+      "type": "id",
+      "title": "Id",
+      "editable": false,
+      "filter": false
+    },
+    {
+      "name": "time_created",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Created",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "time_updated",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Updated",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "name",
+      "source": "main",
+      "type": "string",
+      "title": "Name",
+      "editable": true,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "description",
+      "source": "main",
+      "type": "string",
+      "title": "Description",
+      "editable": true,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "tags",
+      "source": "main",
+      "type": "list",
+      "title": "Tags",
+      "options": [],
+      "editable": true,
+      "default": [],
+      "filter": true,
+      "filter_empty": [],
+      "filter_rule": "any"
+    },
+    {
+      "name": "datafeeds",
+      "source": "main",
+      "type": "children",
+      "title": "Datafeeds",
+      "editable": true,
+      "filter": false
+    }
+  ]
+}

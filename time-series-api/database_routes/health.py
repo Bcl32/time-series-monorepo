@@ -13,6 +13,7 @@ log.debug("Logging is configured.")
 from database import db_models
 from my_db.dependencies import get_repository
 from my_db.repository import DatabaseRepository
+from database.build_object_heirarchy import build_object_heirarchy
 
 router = APIRouter(prefix="/health", tags=["health"])
 
@@ -21,12 +22,12 @@ ModelRepository = Annotated[
     Depends(get_repository(db_models.Health)),
 ]
 ParentRepository = Annotated[
-    DatabaseRepository[db_models.Dataset],
-    Depends(get_repository(db_models.Dataset)),
+    DatabaseRepository[db_models.Datafeed],
+    Depends(get_repository(db_models.Datafeed)),
 ]
 
 MODEL_NAME="health"
-PARENT_NAME="dataset"
+PARENT_NAME="datafeed"
 MODEL=health_schema.Health_DB
 PAYLOAD_MODEL=health_schema.Health_Base
 
@@ -48,7 +49,7 @@ async def create(
             detail="Provided ID for "+PARENT_NAME+" does not exist",
         )
 
-    db_object = await repository.create({**data_dict, "dataset_id":parent_id, PARENT_NAME: parent_obj})
+    db_object = await repository.create({**data_dict, "datafeed_id":parent_id, PARENT_NAME: parent_obj})
     return MODEL.model_validate(db_object)
 
 # CREATE MANY
@@ -69,7 +70,7 @@ async def create_many(
             detail="Provided ID for "+PARENT_NAME+" does not exist",
         )
     
-    for entry in data_dicts:#add datafeed to each dataset object
+    for entry in data_dicts:#add datafeed to each health object
         entry[PARENT_NAME]=parent_obj
  
     db_objects = await repository.create_many(data_dicts,return_models=return_models)
@@ -101,10 +102,11 @@ async def get_by_id(id: uuid.UUID, repository: ModelRepository):
             detail=MODEL_NAME+" does not exist",
         )
     
-    breadcrumb=build_breadcrumb(db_object)
-    object_metadata=MODEL.model_validate(db_object)
+    obj_heirarchy=build_object_heirarchy(db_object=db_object, base_object=PAYLOAD_MODEL.model_validate(db_object), inheritance_chain=["datafeed","collection"])
+    log.debug((obj_heirarchy))
+    metadata=MODEL.model_validate(db_object)
   
-    response ={"metadata":object_metadata, "breadcrumb":breadcrumb}
+    response ={"metadata":metadata, "obj_heirarchy":obj_heirarchy}
     return response
 
 # UPDATE
@@ -127,15 +129,3 @@ async def delete(
 ) -> int:
     rows = await repository.delete(column=column,value=value)
     return rows
-
-def build_breadcrumb(health):
-    #uses raw prediction_obj for the parent data and the validated model for the prediction data, can't use prediction object as it causes an infinite loop
-    health_base=health_schema.Health_Base.model_validate(health)
-    datafeed=health.datafeed
-    datafeed_base=datafeed_schema.Datafeed_Base.model_validate(datafeed)
-    collection=health.datafeed.collection
-    breadcrumb=[]
-    breadcrumb.append({ "type": "Collection", "object": collection, "id": collection.id, "name": collection.name })
-    breadcrumb.append({ "type": "Datafeed", "object": datafeed_base, "id": datafeed.id, "name": datafeed.name })
-    breadcrumb.append({ "type": "Health", "object": health_base, "id": health.id, "name": "Health" })
-    return breadcrumb

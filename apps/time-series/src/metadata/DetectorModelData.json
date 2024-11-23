@@ -1,1 +1,109 @@
-{"model_name": "Detector", "chart_filters": [{"name": "name", "key": "count"}], "get_api_url": "/fastapi/detector/get_all", "add_api_url": "/fastapi/detector/create", "update_api_url": "/fastapi/detector/update", "delete_api_url": "/fastapi/detector/delete?column=id", "model_attributes": [{"name": "id", "source": "db", "type": "id", "title": "Id", "editable": false, "filter": false}, {"name": "time_created", "source": "db", "type": "datetime", "title": "Time Created", "editable": false, "filter": true, "filter_empty": {"timespan_begin": "", "timespan_end": ""}, "filter_rule": null}, {"name": "time_updated", "source": "db", "type": "datetime", "title": "Time Updated", "editable": false, "filter": true, "filter_empty": {"timespan_begin": "", "timespan_end": ""}, "filter_rule": null}, {"name": "name", "source": "main", "type": "string", "title": "Name", "editable": true, "filter": true, "filter_empty": "", "filter_rule": "equals"}, {"name": "description", "source": "main", "type": "string", "title": "Description", "editable": true, "filter": true, "filter_empty": "", "filter_rule": "equals"}, {"name": "source", "source": "main", "type": "string", "title": "Source", "editable": true, "default": "", "filter": true, "filter_empty": "", "filter_rule": "equals"}, {"name": "documentation", "source": "main", "type": "string", "title": "Documentation", "editable": true, "default": "", "filter": true, "filter_empty": "", "filter_rule": "equals"}, {"name": "tags", "source": "main", "type": "list", "title": "Tags", "options": [], "editable": true, "default": [], "filter": true, "filter_empty": [], "filter_rule": "any"}, {"name": "anomalies", "source": "main", "type": "children", "title": "Anomalies", "editable": true, "filter": false}, {"name": "predictions", "source": "main", "type": "children", "title": "Predictions", "editable": true, "filter": false}]}
+{
+  "model_name": "Detector",
+  "chart_filters": [{ "name": "name", "key": "count" }],
+  "api_url_base": "/fastapi/detector",
+  "get_api_url": "/fastapi/detector/get_all",
+  "add_api_url": "/fastapi/detector/create",
+  "update_api_url": "/fastapi/detector/update",
+  "delete_api_url": "/fastapi/detector/delete?column=id",
+  "model_attributes": [
+    {
+      "name": "id",
+      "source": "db",
+      "type": "id",
+      "title": "Id",
+      "editable": false,
+      "filter": false
+    },
+    {
+      "name": "time_created",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Created",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "time_updated",
+      "source": "db",
+      "type": "datetime",
+      "title": "Time Updated",
+      "editable": false,
+      "filter": true,
+      "filter_empty": { "timespan_begin": "", "timespan_end": "" },
+      "filter_rule": null
+    },
+    {
+      "name": "name",
+      "source": "main",
+      "type": "string",
+      "title": "Name",
+      "editable": true,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "description",
+      "source": "main",
+      "type": "string",
+      "title": "Description",
+      "editable": true,
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "source",
+      "source": "main",
+      "type": "string",
+      "title": "Source",
+      "editable": true,
+      "default": "",
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "documentation",
+      "source": "main",
+      "type": "string",
+      "title": "Documentation",
+      "editable": true,
+      "default": "",
+      "filter": true,
+      "filter_empty": "",
+      "filter_rule": "equals"
+    },
+    {
+      "name": "tags",
+      "source": "main",
+      "type": "list",
+      "title": "Tags",
+      "options": [],
+      "editable": true,
+      "default": [],
+      "filter": true,
+      "filter_empty": [],
+      "filter_rule": "any"
+    },
+    {
+      "name": "anomalies",
+      "source": "main",
+      "type": "children",
+      "title": "Anomalies",
+      "editable": true,
+      "filter": false
+    },
+    {
+      "name": "predictions",
+      "source": "main",
+      "type": "children",
+      "title": "Predictions",
+      "editable": true,
+      "filter": false
+    }
+  ]
+}

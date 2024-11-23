@@ -13,6 +13,7 @@ log.debug("Logging is configured.")
 from database import db_models
 from my_db.dependencies import get_repository
 from my_db.repository import DatabaseRepository
+from database.build_object_heirarchy import build_object_heirarchy
 
 router = APIRouter(prefix="/datafeed", tags=["datafeed"])
 
@@ -112,10 +113,9 @@ async def get_by_id(id: uuid.UUID, repository: ModelRepository):
             detail=MODEL_NAME+" does not exist",
         )
     
-    breadcrumb=build_breadcrumb(db_object)
-    dataset_metadata=MODEL.model_validate(db_object)
-  
-    response ={"metadata":dataset_metadata, "breadcrumb":breadcrumb}
+    obj_heirarchy=build_object_heirarchy(db_object=db_object, base_object=PAYLOAD_MODEL.model_validate(db_object), inheritance_chain=["collection"])
+    metadata=MODEL.model_validate(db_object)
+    response ={"metadata":metadata, "obj_heirarchy":obj_heirarchy}
     return response
 
 # UPDATE
@@ -138,11 +138,3 @@ async def delete(
 ) -> int:
     rows = await repository.delete(column=column,value=value)
     return rows
-
-def build_breadcrumb(datafeed):
-    datafeed_obj=datafeed_schema.Datafeed_Base.model_validate(datafeed)
-    collection=datafeed.collection
-    breadcrumb=[]
-    breadcrumb.append({ "type": "Collection", "object": collection, "id": collection.id, "name": collection.name })
-    breadcrumb.append({ "type": "Datafeed", "object": datafeed_obj, "id": datafeed.id, "name": datafeed.name })
-    return breadcrumb

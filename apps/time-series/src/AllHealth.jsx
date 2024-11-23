@@ -4,8 +4,6 @@ import React from "react";
 //MONOREPO PACKAGE IMPORTS
 import { useGetRequest } from "@repo/hooks/useGetRequest";
 
-import { setTitleText } from "@repo/utils/setTitleText";
-
 //LOCAL COMPONENTS
 import { HealthTableData } from "./components/tables/HealthTableData";
 import NavigationBreadcrumb from "./NavigationBreadcrumb";
@@ -23,7 +21,6 @@ export default function AllHealth() {
     var breadcrumb = [];
   }
 
-  setTitleText("All Health Objects");
   var table_metadata = HealthTableData({
     add_api_url: "n/a",
     query_invalidation: [get_api_url],

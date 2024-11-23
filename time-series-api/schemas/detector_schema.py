@@ -11,7 +11,7 @@ from schemas import prediction_schema
 
 class Detector_Base(BaseModel):
     """Detector payload model."""
-    model_config = ConfigDict(use_enum_values=True)
+    model_config = ConfigDict(from_attributes=True, use_enum_values=True)
 
     name: str
     description: str

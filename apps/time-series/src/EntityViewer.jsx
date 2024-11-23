@@ -1,9 +1,7 @@
 import React from "react";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 import { ProcessDataset } from "@repo/utils/ProcessDataset";
 import { AllFilters } from "@repo/filters/AllFilters";
-import { FilterElement } from "@repo/filters/FilterElement";
 import { ChartFilter } from "@repo/filters/ChartFilter";
 import { InitializeFilters } from "@repo/filters/InitializeFilters";
 import { FiltersSummary } from "@repo/filters/FiltersSummary";
@@ -15,6 +13,7 @@ import { GetSubkeyValues } from "@repo/filters/GetSubkeyValues";
 import { DataTable } from "@repo/datatable/DataTable";
 import { StatsTable } from "@repo/datatable/StatsTable";
 
+import { AnimatedTabs, TabContent } from "@repo/utils/AnimatedTabs";
 // export const FilterContext = React.createContext(0);
 
 export function EntityViewer({
@@ -30,7 +29,7 @@ export function EntityViewer({
     ProcessDataset(dataset, filters, ModelData);
 
   //console.log(active_filters, filteredData, datasetStats, filteredStats);
-  console.log(filters);
+
   function change_filters(name, key, value) {
     setFilters({
       ...filters, // Copy other fields
@@ -85,28 +84,26 @@ export function EntityViewer({
       >
         <div className="grid xl:grid-cols-12 py-3">
           <div className="col-span-7">
-            {dataset.length == 0 && <div>No {name} found.</div>}
+            {dataset.length == 0 && (
+              <div>
+                No <span className="capitalize">{name}</span> found.
+              </div>
+            )}
             {dataset.length >= 1 && (
               <div className="bg-card">
                 <h1 className="text-2xl bg-gradient">
-                  {name}: {filteredData.length} / {dataset.length} (
+                  <span className="capitalize">{name}</span>:{" "}
+                  {filteredData.length} / {dataset.length} (
                   {((filteredData.length / dataset.length) * 100).toFixed(2)}
                   %)
                 </h1>
-                <TabGroup>
-                  <TabList>
-                    <Tab className="inline-block p-4 border-b-2 border-transparent rounded-t-lg data-[hover]:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 data-[selected]:text-indigo-600 data-[selected]:border-indigo-600">
-                      Charts
-                    </Tab>
-                    <Tab className="inline-block p-4 border-b-2 border-transparent rounded-t-lg data-[hover]:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 data-[selected]:text-indigo-600 data-[selected]:border-indigo-600">
-                      Summary
-                    </Tab>
-                  </TabList>
-                  <TabPanels className=" overflow-auto">
-                    <TabPanel>
+
+                <AnimatedTabs tab_titles={["Charts", "Summary"]}>
+                  <div className="overflow-auto">
+                    <TabContent>
                       <div className="grid xl:grid-cols-2">{charts}</div>
-                    </TabPanel>
-                    <TabPanel className="h-96">
+                    </TabContent>
+                    <TabContent className="h-96">
                       <FiltersSummary
                         change_filters={change_filters}
                         model_data={ModelData.model_attributes}
@@ -114,9 +111,9 @@ export function EntityViewer({
                         active_filters={active_filters}
                       ></FiltersSummary>
                       <StatsTable table_data={datasetStats}></StatsTable>
-                    </TabPanel>
-                  </TabPanels>
-                </TabGroup>
+                    </TabContent>
+                  </div>
+                </AnimatedTabs>
 
                 {/* {string_filters.map((entry) => {
                   return (
@@ -129,7 +126,7 @@ export function EntityViewer({
                   );
                 })} */}
 
-                <AllFilters
+                {/* <AllFilters
                   name={name}
                   dataset={dataset}
                   filteredData={filteredData}
@@ -138,7 +135,7 @@ export function EntityViewer({
                   datasetStats={datasetStats}
                   filteredStats={filteredStats}
                   ModelData={ModelData}
-                />
+                /> */}
               </div>
             )}
           </div>

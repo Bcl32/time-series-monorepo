@@ -19,7 +19,7 @@ function DebouncedNumberFilter({ name, ...props }) {
   var min = filters[name]["value"]["min"];
   var max = filters[name]["value"]["max"];
 
-  console.log(filters[name]["value"]);
+  //console.log(filters[name]["value"]);
 
   // const [values, setValues] = React.useState([min, max]);
 

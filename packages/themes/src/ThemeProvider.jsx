@@ -18,33 +18,33 @@ export function ThemeProvider({
   );
 
   useEffect(() => {
-    const root = window.document.documentElement;
-
-    root.classList.remove("light", "dark", "green", "dark-green", "dark-blue");
-
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
         ? "dark"
         : "light";
 
-      root.classList.add(systemTheme);
+      document.documentElement.setAttribute("data-theme", systemTheme);
       return;
     }
 
-    root.classList.add(theme);
-    console.log(theme);
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  const theme_options = ["light", "dark", "green", "dark-green", "dark-blue"];
+
+  const theme_type = ["light", "green"].includes(theme) ? "light" : "dark";
 
   const value = {
     theme,
+    theme_options,
+    theme_type,
     setTheme: (theme) => {
       localStorage.setItem(storageKey, theme);
       setTheme(theme);
     },
   };
-  console.log(value);
-  console.log(root.classList);
+
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
       {children}

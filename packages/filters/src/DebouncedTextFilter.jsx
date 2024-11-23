@@ -20,7 +20,6 @@ function DebouncedTextFilter({ name, ...props }) {
 
   //debounce the input
   React.useEffect(() => {
-    console.log("inputValue", inputValue);
     const timeoutId = setTimeout(() => {
       setDebouncedInputValue(inputValue);
     }, 500);
@@ -29,7 +28,6 @@ function DebouncedTextFilter({ name, ...props }) {
 
   //update state with debounced value
   React.useEffect(() => {
-    console.log("debouncedInputValue", debouncedInputValue);
     change_filters(name, "value", debouncedInputValue);
   }, [debouncedInputValue]);
 

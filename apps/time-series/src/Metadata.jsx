@@ -1,6 +1,10 @@
 import React from "react";
 
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { AnimatedTabs, TabContent } from "@repo/utils/AnimatedTabs";
+import { DialogButton } from "@repo/utils/DialogButton";
+import { Button } from "@repo/utils/Button";
+
+import { EditModelForm } from "@repo/forms/EditModelForm";
 
 //other modules
 import dayjs from "dayjs";
@@ -9,83 +13,100 @@ import { KeyValueTable } from "@repo/datatable/KeyValueTable";
 import { Capitalize } from "@repo/utils/StringFunctions";
 
 export default function Metadata({
-  ModelData,
-  metadata,
+  model_metadata,
+  object_data,
+  obj_heirarchy,
   children_attributes,
+  query_invalidation,
   parent_name,
 }) {
+  var ModelData = model_metadata.model_attributes;
+  var model_name = model_metadata.model_name;
+
   var main_attributes = ModelData.filter((entry) => {
     return entry["source"] != "db";
   });
-  var main_table_data = get_key_value_pairs(main_attributes, metadata);
+  var main_table_data = get_key_value_pairs(main_attributes, object_data);
 
   var metadata_attributes = ModelData.filter((entry) => {
     return entry["source"] == "db";
   });
-  var metadata_table_data = get_key_value_pairs(metadata_attributes, metadata);
+  var metadata_table_data = get_key_value_pairs(
+    metadata_attributes,
+    object_data
+  );
 
   const child_tab_titles = children_attributes.map((child) => {
     var child_name = child[0];
-    return (
-      <Tab
-        key={"tab_title" + { child_name }}
-        className="inline-block p-4 border-b-2 border-transparent rounded-t-lg data-[hover]:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 data-[selected]:text-indigo-600 data-[selected]:border-indigo-600"
-      >
-        {Capitalize(child_name)}
-      </Tab>
-    );
+    return Capitalize(child_name);
   });
 
   const child_tabs = children_attributes.map((child) => {
     var child_name = child[0];
     var child_model = child[1];
-    var child_data = metadata[child_name];
+    var child_data = object_data[child_name];
 
     let table_data = get_key_value_pairs(child_model, child_data);
 
     return (
-      <TabPanel key={"tab_panel" + { child_name }}>
+      <TabContent key={"tab_panel" + { child_name }}>
         <KeyValueTable
           key={"table" + { child_name }}
           table_data={table_data}
         ></KeyValueTable>
-      </TabPanel>
+      </TabContent>
     );
   });
 
+  var tab_titles = ["Main Attributes", "Metadata", "Full JSON", "Parent Data"];
+
+  tab_titles.push(child_tab_titles);
+  console.log(tab_titles);
+
   return (
     <div>
-      <TabGroup>
-        <TabList>
-          <Tab className="inline-block p-4 border-b-2 border-transparent rounded-t-lg data-[hover]:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 data-[selected]:text-indigo-600 data-[selected]:border-indigo-600">
-            Main Attributes
-          </Tab>
-          <Tab className="inline-block p-4 border-b-2 border-transparent rounded-t-lg data-[hover]:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 data-[selected]:text-indigo-600 data-[selected]:border-indigo-600">
-            Metadata
-          </Tab>
-          {child_tab_titles}
-          <Tab className="inline-block p-4 border-b-2 border-transparent rounded-t-lg data-[hover]:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 data-[selected]:text-indigo-600 data-[selected]:border-indigo-600">
-            Full JSON
-          </Tab>
-        </TabList>
-        <TabPanels className="h-96 overflow-auto">
-          <TabPanel>
-            <KeyValueTable table_data={main_table_data}></KeyValueTable>
-          </TabPanel>
-          <TabPanel>
-            <KeyValueTable table_data={metadata_table_data}></KeyValueTable>
-          </TabPanel>
-          {child_tabs}
+      <h1 className="text-2xl capitalize">
+        {model_metadata.model_name}: {object_data.name}{" "}
+      </h1>
 
-          <TabPanel>
+      <DialogButton
+        key={"edit-dialog-" + object_data.id}
+        button={<Button variant="shine">Edit {model_name}</Button>}
+        title="Edit Entry"
+      >
+        <EditModelForm
+          key={"entryform_edit_data_entry"}
+          ModelData={model_metadata}
+          query_invalidation={query_invalidation}
+          obj_data={object_data}
+        />
+      </DialogButton>
+
+      <AnimatedTabs tab_titles={tab_titles}>
+        <div className="h-96 overflow-auto">
+          <TabContent>
+            <KeyValueTable table_data={main_table_data}></KeyValueTable>
+          </TabContent>
+          <TabContent>
+            <KeyValueTable table_data={metadata_table_data}></KeyValueTable>
+          </TabContent>
+          <TabContent>
             <div className="h-full">
-              <pre style={{ fontSize: "10px" }}>
-                <code>{JSON.stringify(metadata, null, 2)}</code>
+              <pre style={{ fontSize: "16px" }}>
+                <code>{JSON.stringify(object_data, null, 2)}</code>
               </pre>
             </div>
-          </TabPanel>
-        </TabPanels>
-      </TabGroup>
+          </TabContent>
+          <TabContent>
+            <div className="h-full">
+              <pre style={{ fontSize: "16px" }}>
+                <code>{JSON.stringify(obj_heirarchy, null, 2)}</code>
+              </pre>
+            </div>
+          </TabContent>
+          {child_tabs}
+        </div>
+      </AnimatedTabs>
     </div>
   );
 }

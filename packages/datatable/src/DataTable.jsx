@@ -92,29 +92,28 @@ export function DataTable(props) {
 
   return (
     <div>
-      <h3 className="display: inline-block text-2xl">{props.title}</h3>
+      <h3 className="display: inline-block text-2xl capitalize">
+        {props.title}
+      </h3>
       {props.create_enabled && (
         <DialogButton
           className="display: inline-block"
           key={"dialog-add-entry"}
-        >
-          <DialogButton.Button asChild>
-            <Button variant="default" size="default">
-              <AddIcon /> {"Create New"}
+          button={
+            <Button>
+              <AddIcon />
+              {"Create New"}
             </Button>
-          </DialogButton.Button>
-
-          <DialogButton.Content
-            title={"Create New " + props.ModelData.model_name}
-            variant="grey"
-          >
-            <AddModelForm
-              key={"entryform_add_data_entry"}
-              add_api_url={props.add_api_url}
-              ModelData={props.ModelData}
-              query_invalidation={props.query_invalidation}
-            />
-          </DialogButton.Content>
+          }
+          title={"Create New " + props.ModelData.model_name}
+          variant="grey"
+        >
+          <AddModelForm
+            key={"entryform_add_data_entry"}
+            add_api_url={props.add_api_url}
+            ModelData={props.ModelData}
+            query_invalidation={props.query_invalidation}
+          />
         </DialogButton>
       )}
 
@@ -145,53 +144,24 @@ export function DataTable(props) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* <DialogButton key={"dialog-show-hide-columns"} isModal={true}>
-        <DialogButton.Button asChild>
-          <Button variant="default" size="default">
-            <ViewColumnIcon /> {"Columns"}
-          </Button>
-        </DialogButton.Button>
-
-        <DialogButton.Content title="Show/Hide Columns">
-          {tableInstance.getAllLeafColumns().map((column) => {
-            return (
-              <div key={column.id} className="px-1">
-                <label>
-                  <input
-                    {...{
-                      type: "checkbox",
-                      checked: column.getIsVisible(),
-                      onChange: column.getToggleVisibilityHandler(),
-                    }}
-                  />{" "}
-                  {column.id}
-                </label>
-              </div>
-            );
-          })}
-        </DialogButton.Content>
-      </DialogButton> */}
-
       <DialogButton
+        className="display: inline-block"
         key={"dialog-delete-entry"}
         isModal={true}
-        className="display: inline-block"
-      >
-        <DialogButton.Button asChild>
-          <Button variant="default" size="default">
+        button={
+          <Button>
             <DeleteIcon /> {"Delete"}
           </Button>
-        </DialogButton.Button>
-
-        <DialogButton.Content title="Delete Entries">
-          <DeleteModelForm
-            key={"delete_entry_form"}
-            delete_api_url={props.ModelData.delete_api_url}
-            query_invalidation={props.query_invalidation}
-            rowSelection={rowSelection}
-            setRowSelection={setRowSelection}
-          ></DeleteModelForm>
-        </DialogButton.Content>
+        }
+        title="Delete Entries"
+      >
+        <DeleteModelForm
+          key={"delete_entry_form"}
+          delete_api_url={props.ModelData.delete_api_url}
+          query_invalidation={props.query_invalidation}
+          rowSelection={rowSelection}
+          setRowSelection={setRowSelection}
+        ></DeleteModelForm>
       </DialogButton>
 
       <Table className="text-md border-4 rounded-lg">
