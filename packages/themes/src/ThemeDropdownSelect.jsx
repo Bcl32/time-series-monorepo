@@ -8,7 +8,7 @@ import {
 
 import { useTheme } from "./ThemeProvider";
 
-export function ThemeSelector() {
+export function ThemeDropdownSelect() {
   const { setTheme, theme_options } = useTheme();
 
   var dropdown_items = theme_options.map((entry) => {
@@ -24,7 +24,7 @@ export function ThemeSelector() {
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="default">
           <span>Change Theme</span>
-          <span className="sr-only">Toggle theme</span>
+          <span className="sr-only">Change Theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">{dropdown_items}</DropdownMenuContent>

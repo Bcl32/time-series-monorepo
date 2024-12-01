@@ -69,25 +69,23 @@ export function TimeFilter({ name, ...props }) {
         </div>
 
         <div>
-          <DialogButton key={"dialog-time-edit" + name}>
-            <DialogButton.Button asChild>
+          <DialogButton
+            key={"dialog-time-edit" + name}
+            button={
               <Button variant="default" size="default">
                 <EditIcon /> Edit Shortcuts
               </Button>
-            </DialogButton.Button>
-
-            <DialogButton.Content
-              title={"Change datetime for " + name}
-              variant="grey"
-              size="big"
-            >
-              <TimeEditDialog
-                filters={filters}
-                change_time_filter={change_time_filter}
-                change_filters={change_filters}
-                name={name}
-              ></TimeEditDialog>
-            </DialogButton.Content>
+            }
+            size="big"
+            title={"Change datetime for " + name}
+            variant="grey"
+          >
+            <TimeEditDialog
+              filters={filters}
+              change_time_filter={change_time_filter}
+              change_filters={change_filters}
+              name={name}
+            ></TimeEditDialog>
           </DialogButton>
 
           <Button onClick={reset_value} variant="default" size="lg">

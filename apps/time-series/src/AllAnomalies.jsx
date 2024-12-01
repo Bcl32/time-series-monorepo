@@ -1,38 +1,32 @@
-//THIRD PARTY LIBRARIES
-import React, { useRef } from "react";
-
-//MONOREPO PACKAGE IMPORTS
-import { useGetRequest } from "@repo/hooks/useGetRequest";
-
 //LOCAL COMPONENTS
-import { AnomaliesTableData } from "./components/tables/AnomaliesTableData";
-import NavigationBreadcrumb from "./NavigationBreadcrumb";
+import { LoadAllEntities } from "./LoadAllEntities";
 import EntityViewer from "./EntityViewer";
-//my component data
-import AnomalyModelData from "./metadata/AnomalyModelData.json";
+//component data
+import MainModelData from "./metadata/AnomalyModelData.json";
+import { AnomaliesTableData as TableData } from "./components/tables/AnomaliesTableData";
 
 export default function AllAnomalies() {
-  const get_api_url = AnomalyModelData.get_api_url;
-  const getResponse = useGetRequest(get_api_url);
+  const get_api_url = MainModelData.get_api_url;
 
-  if (getResponse.isSuccess) {
-    var dataset = getResponse.data; //runs every state update
-    var breadcrumb = [];
-  }
-  var table_metadata = AnomaliesTableData({
+  var { dataset } = LoadAllEntities({
+    get_api_url: get_api_url,
+    name: MainModelData.set_name,
+  });
+
+  var table_metadata = TableData({
     add_api_url: "n/a",
     query_invalidation: [get_api_url],
     create_enabled: false,
   });
+
   return (
     <div>
-      {getResponse.isSuccess && (
+      {dataset && (
         <div>
-          <NavigationBreadcrumb data={breadcrumb} />
           <EntityViewer
-            name="Anomalies"
+            name={MainModelData.set_name}
             dataset={dataset}
-            ModelData={AnomalyModelData}
+            ModelData={MainModelData}
             table_config={table_metadata}
           ></EntityViewer>
         </div>

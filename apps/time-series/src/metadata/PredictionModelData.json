@@ -1,5 +1,6 @@
 {
   "model_name": "Prediction",
+  "set_name": "Predictions",
   "chart_filters": [],
   "api_url_base": "/fastapi/prediction",
   "get_api_url": "/fastapi/prediction/get_all",

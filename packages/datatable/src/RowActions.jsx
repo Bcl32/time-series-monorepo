@@ -73,8 +73,7 @@ export function RowActions({ row, ModelData, query_invalidation }) {
           isModal={true}
           onSelect={handleDialogItemSelect}
           onOpenChange={handleDialogItemOpenChange}
-        >
-          <DialogButton.Button asChild>
+          button={
             <DropdownMenuItem
               onSelect={(event) => {
                 event.preventDefault();
@@ -83,18 +82,19 @@ export function RowActions({ row, ModelData, query_invalidation }) {
             >
               Edit
             </DropdownMenuItem>
-          </DialogButton.Button>
-
-          <DialogButton.Content title="Edit Entry" variant="grey">
-            <EditModelForm
-              key={"entryform_edit_data_entry"}
-              create_enabled={true}
-              add_api_url={ModelData.add_api_url}
-              ModelData={ModelData}
-              query_invalidation={query_invalidation}
-              obj_data={row.original}
-            />
-          </DialogButton.Content>
+          }
+          size="big"
+          variant="grey"
+          title="Edit Entry"
+        >
+          <EditModelForm
+            key={"entryform_edit_data_entry"}
+            create_enabled={true}
+            add_api_url={ModelData.add_api_url}
+            ModelData={ModelData}
+            query_invalidation={query_invalidation}
+            obj_data={row.original}
+          />
         </DialogButton>
 
         <DropdownMenuSeparator />

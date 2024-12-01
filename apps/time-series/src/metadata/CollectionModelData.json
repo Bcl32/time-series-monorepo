@@ -1,6 +1,8 @@
 {
   "model_name": "Collection",
+  "set_name": "Collections",
   "chart_filters": [],
+  "children": [],
   "api_url_base": "/fastapi/collection/",
   "get_api_url": "/fastapi/collection/get_all",
   "add_api_url": "/fastapi/collection/create",

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
+import Dashboard from "./Dashboard";
 import AllCollections from "./AllCollections";
 import AllDatafeeds from "./AllDatafeeds";
 import AllDatasets from "./AllDatasets";
@@ -28,7 +29,8 @@ function MainApp() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<AllCollections />} />
+            <Route index element={<Dashboard />} />
+            <Route path="Dashboard" element={<Dashboard />} />
             <Route path="AllCollections" element={<AllCollections />} />
             <Route path="AllDatafeeds" element={<AllDatafeeds />} />
             <Route path="AllDatasets" element={<AllDatasets />} />

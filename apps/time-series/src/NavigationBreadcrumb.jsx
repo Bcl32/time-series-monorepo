@@ -10,15 +10,19 @@ import {
   BreadcrumbSeparator,
 } from "@repo/utils/Breadcrumb";
 
+import { useNavigation } from "./NavigationProvider";
+
 export default function NavigationBreadcrumb({ data }) {
+  const { navigation } = useNavigation();
+
   return (
     <Breadcrumb>
-      <BreadcrumbList className="text-xl">
+      <BreadcrumbList className="text-xl text-foreground">
         <BreadcrumbLink asChild>
           <Link to={"/"}>Home</Link>
         </BreadcrumbLink>
 
-        {data.map((entry) => {
+        {navigation?.map((entry) => {
           return (
             <div
               className={"inline-flex items-center gap-1.5"}
@@ -34,17 +38,7 @@ export default function NavigationBreadcrumb({ data }) {
                     to={"/" + entry["type"]}
                     state={{ object_id: entry["id"] }}
                   >
-                    <div className="flex flex-col">
-                      <span className="text-xs">
-                        {entry["type"][0].toUpperCase() +
-                          entry["type"].slice(1)}
-                        :
-                      </span>
-                      <span>
-                        {entry["name"][0].toUpperCase() +
-                          entry["name"].slice(1)}
-                      </span>
-                    </div>
+                    <LinkLabel entry={entry}></LinkLabel>
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
@@ -54,4 +48,21 @@ export default function NavigationBreadcrumb({ data }) {
       </BreadcrumbList>
     </Breadcrumb>
   );
+}
+
+function LinkLabel({ entry }) {
+  if (entry.hasOwnProperty("type")) {
+    return (
+      <div className="flex flex-col">
+        <span className="text-xs capitalize">{entry["type"]}:</span>
+        <span className="capitalize">{entry["name"]}</span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="flex flex-col">
+        <span className="capitalize">{entry["name"]}</span>
+      </div>
+    );
+  }
 }

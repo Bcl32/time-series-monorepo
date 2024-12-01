@@ -1,0 +1,94 @@
+{
+  "collections": [
+    {
+      "name": "artificialWithAnomaly",
+      "description": "Artificially-generated data with varying types of anomalies.",
+      "tags": ["nab"],
+      "datafeeds": [
+        {
+          "name": "Art Daily Jumpsup",
+          "folder": "artificialWithAnomaly",
+          "filename": "art_daily_jumpsup.csv",
+          "feed_type": "file",
+          "tags": ["artificial"],
+          "start_time": "2014-04-01T00:00:00Z",
+          "end_time": "2014-04-01T00:05:00Z",
+          "datasets": [
+            {
+              "folder": "artificialWithAnomaly",
+              "filename": "art_daily_jumpsup.csv",
+              "path": "artificialWithAnomaly/art_daily_jumpsup.csv",
+              "labeled": true,
+              "file_type": "csv",
+              "anomaly_count": 1,
+              "tags": ["real"],
+              "start_time": "2014-04-01T00:00:00Z",
+              "end_time": "2014-04-01T00:05:00Z",
+              "predictions": [
+                {
+                  "dataset_name": "realTweets/Twitter_volume_UPS.csv",
+                  "detector_name": "labeler",
+                  "url": "/app/static/nab/predictions/labeler/realTweets/labeler_Twitter_volume_UPS.csv",
+                  "anomalies": [
+                    {
+                      "value": 53,
+                      "time": "2015-03-03T00:27:53Z",
+                      "anomaly_score": 0,
+                      "threshold": 0,
+                      "status": "test",
+                      "severity": "low",
+                      "tags": ["label"],
+                      "detector_name": "labeler",
+                      "dataset_name": "realTweets/Twitter_volume_UPS.csv"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "health": {
+            "last_received": "2024-11-05T13:55:00.409714Z",
+            "heartbeat_frequency": 3600,
+            "heartbeat_timeout": 3,
+            "score": 100,
+            "status": "active"
+          }
+        }
+      ]
+    }
+  ],
+  "detectors": [
+    {
+      "id": "b2dc896b-1ca7-4bea-8898-00f991d19dca",
+      "time_created": "2024-11-05T14:05:12.926888Z",
+      "time_updated": "2024-11-05T14:05:12.926209Z",
+      "name": "relativeEntropy",
+      "description": " The algorithm is based on a hypothesis testing approach that compares observed data against multiple null hypotheses, representing frequencies of quantized data over a window. If the observed data is unseen and does not agree with any existing hypothesis, it is declared anomalous and a new hypothesis is created. Otherwise, it is declared non-anomalous, provided that the accepted hypothesis occurs frequently enough. Decision to accept/reject a null hypothesis is based on relative entropy compared against a threshold of acceptable false negative probability determined by the chi-squared distribution. Step-by-step details are given in code comments and parameters have been tuned for best performance of NAB.",
+      "source": "Statistical Techniques for Online Anomaly Detection in Data Centers, Proceedings of the 8th ACM international conference on Autonomic computing. ACM, 2011",
+      "documentation": "",
+      "tags": ["Real"],
+      "anomalies": [
+        {
+          "value": 68,
+          "time": "2014-04-01T09:00:00Z",
+          "anomaly_score": 1,
+          "threshold": 0.5,
+          "status": "open",
+          "severity": "medium",
+          "tags": ["nab"],
+          "detector_id": "b2dc896b-1ca7-4bea-8898-00f991d19dca",
+          "detector_name": "relativeEntropy",
+          "dataset_name": "artificialNoAnomaly/art_daily_no_noise.csv"
+        }
+      ],
+      "predictions": [
+        {
+          "dataset_name": "realAWSCloudwatch/grok_asg_anomaly.csv",
+          "detector_name": "skyline",
+          "url": "/app/static/nab/predictions/skyline/realAWSCloudwatch/skyline_grok_asg_anomaly.csv",
+          "anomalies": "..."
+        }
+      ]
+    }
+  ]
+}

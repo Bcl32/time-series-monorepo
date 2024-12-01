@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import Themes from "./themes.json";
 
 const initialState = {
   theme: "system",
@@ -31,9 +32,11 @@ export function ThemeProvider({
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const theme_options = ["light", "dark", "green", "dark-green", "dark-blue"];
-
-  const theme_type = ["light", "green"].includes(theme) ? "light" : "dark";
+  // const theme_options = ["light", "dark", "green", "dark-green", "dark-blue"];
+  const theme_options = Object.keys(Themes);
+  const theme_type = ["light", "light-green"].includes(theme)
+    ? "light"
+    : "dark";
 
   const value = {
     theme,

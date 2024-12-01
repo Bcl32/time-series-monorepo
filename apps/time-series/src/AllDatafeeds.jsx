@@ -1,39 +1,32 @@
-//THIRD PARTY LIBRARIES
-import React from "react";
-
-//MONOREPO PACKAGE IMPORTS
-import { useGetRequest } from "@repo/hooks/useGetRequest";
-
 //LOCAL COMPONENTS
-import { DatafeedsTableData } from "./components/tables/DatafeedsTableData";
-import NavigationBreadcrumb from "./NavigationBreadcrumb";
+import { LoadAllEntities } from "./LoadAllEntities";
 import EntityViewer from "./EntityViewer";
 //component data
-import DatafeedModelData from "./metadata/DatafeedModelData.json";
+import MainModelData from "./metadata/DatafeedModelData.json";
+import { DatafeedsTableData as TableData } from "./components/tables/DatafeedsTableData";
 
 export default function AllDatafeeds() {
-  const get_api_url = DatafeedModelData.get_api_url;
-  const getResponse = useGetRequest(get_api_url);
+  const get_api_url = MainModelData.get_api_url;
 
-  if (getResponse.isSuccess) {
-    var dataset = getResponse.data; //runs every state update
-    var breadcrumb = [];
-  }
+  var { dataset } = LoadAllEntities({
+    get_api_url: get_api_url,
+    name: MainModelData.set_name,
+  });
 
-  var table_metadata = DatafeedsTableData({
-    add_api_url: "/fastapi/datafeed/create",
+  var table_metadata = TableData({
+    add_api_url: MainModelData.add_api_url,
     query_invalidation: [get_api_url],
     create_enabled: false,
   });
+
   return (
     <div>
-      {getResponse.isSuccess && (
+      {dataset && (
         <div>
-          <NavigationBreadcrumb data={breadcrumb} />
           <EntityViewer
-            name="Datafeeds"
+            name={MainModelData.set_name}
             dataset={dataset}
-            ModelData={DatafeedModelData}
+            ModelData={MainModelData}
             table_config={table_metadata}
           ></EntityViewer>
         </div>

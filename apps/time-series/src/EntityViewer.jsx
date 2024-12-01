@@ -98,11 +98,8 @@ export function EntityViewer({
                   %)
                 </h1>
 
-                <AnimatedTabs tab_titles={["Charts", "Summary"]}>
+                <AnimatedTabs tab_titles={["Summary", "Charts"]}>
                   <div className="overflow-auto">
-                    <TabContent>
-                      <div className="grid xl:grid-cols-2">{charts}</div>
-                    </TabContent>
                     <TabContent className="h-96">
                       <FiltersSummary
                         change_filters={change_filters}
@@ -111,6 +108,9 @@ export function EntityViewer({
                         active_filters={active_filters}
                       ></FiltersSummary>
                       <StatsTable table_data={datasetStats}></StatsTable>
+                    </TabContent>
+                    <TabContent>
+                      <div className="grid xl:grid-cols-2">{charts}</div>
                     </TabContent>
                   </div>
                 </AnimatedTabs>

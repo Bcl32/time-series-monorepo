@@ -1,5 +1,6 @@
 {
   "model_name": "Datafeed",
+  "set_name": "Datafeeds",
   "chart_filters": [
     { "name": "folder", "type": "bar", "key": "count" },
     { "name": "tags", "type": "bar", "key": "count" }

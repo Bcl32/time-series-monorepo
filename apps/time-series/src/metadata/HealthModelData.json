@@ -1,5 +1,6 @@
 {
-  "model_name": "Health Object",
+  "model_name": "Health",
+  "set_name": "Health Objects",
   "chart_filters": [{ "name": "status", "key": "count" }],
   "api_url_base": "/fastapi/health",
   "get_api_url": "/fastapi/health/get_all",

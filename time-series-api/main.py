@@ -23,11 +23,13 @@ sys.path.append('./nab/')
 sys.path.append('/app/python-modules')
 
 import nab_routes
+import data_loader
 from timeseries import single_timeseries
 from database_routes import collection, datafeed, dataset, anomaly, detector, prediction, health
 
 app = FastAPI()
 app.include_router(nab_routes.router)
+app.include_router(data_loader.router)
 app.include_router(single_timeseries.router)
 app.include_router(anomaly.router)
 app.include_router(collection.router)

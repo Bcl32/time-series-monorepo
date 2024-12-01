@@ -1,39 +1,29 @@
-//THIRD PARTY LIBRARIES
-import React from "react";
-
-//MONOREPO PACKAGE IMPORTS
-import { useGetRequest } from "@repo/hooks/useGetRequest";
-
 //LOCAL COMPONENTS
-
-import { CollectionsTableData } from "./components/tables/CollectionsTableData";
-import NavigationBreadcrumb from "./NavigationBreadcrumb";
-
+import { LoadAllEntities } from "./LoadAllEntities";
 import EntityViewer from "./EntityViewer";
 //component data
 import MainModelData from "./metadata/CollectionModelData.json";
+import { CollectionsTableData as TableData } from "./components/tables/CollectionsTableData";
 
 export default function AllCollections() {
-  var object_name = "Collection";
   const get_api_url = MainModelData.get_api_url;
-  const getResponse = useGetRequest(get_api_url);
 
-  if (getResponse.isSuccess) {
-    var dataset = getResponse.data; //runs every state update
-    var breadcrumb = [];
-  }
+  var { dataset } = LoadAllEntities({
+    get_api_url: get_api_url,
+    name: MainModelData.set_name,
+  });
 
-  var table_metadata = CollectionsTableData({
+  var table_metadata = TableData({
     add_api_url: MainModelData.add_api_url,
     query_invalidation: [get_api_url],
   });
+
   return (
     <div>
-      {getResponse.isSuccess && (
+      {dataset && (
         <div>
-          <NavigationBreadcrumb data={breadcrumb} />
           <EntityViewer
-            name="Collections"
+            name={MainModelData.set_name}
             dataset={dataset}
             ModelData={MainModelData}
             table_config={table_metadata}

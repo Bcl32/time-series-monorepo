@@ -5,6 +5,7 @@ import { DialogButton } from "@repo/utils/DialogButton";
 import { Button } from "@repo/utils/Button";
 
 import { EditModelForm } from "@repo/forms/EditModelForm";
+import { ShowHeirarchy } from "@repo/utils/ShowHeirarchy";
 
 //other modules
 import dayjs from "dayjs";
@@ -92,9 +93,10 @@ export default function Metadata({
           </TabContent>
           <TabContent>
             <div className="h-full">
-              <pre style={{ fontSize: "16px" }}>
+              {/* <pre style={{ fontSize: "16px" }}>
                 <code>{JSON.stringify(object_data, null, 2)}</code>
-              </pre>
+              </pre> */}
+              <ShowHeirarchy json_data={object_data}></ShowHeirarchy>
             </div>
           </TabContent>
           <TabContent>
@@ -102,6 +104,8 @@ export default function Metadata({
               <pre style={{ fontSize: "16px" }}>
                 <code>{JSON.stringify(obj_heirarchy, null, 2)}</code>
               </pre>
+
+              <ShowHeirarchy json_data={obj_heirarchy}></ShowHeirarchy>
             </div>
           </TabContent>
           {child_tabs}

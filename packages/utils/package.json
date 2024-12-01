@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "exports": {
     "./AnimatedTabs": "./src/AnimatedTabs.jsx",
+    "./ShowHeirarchy": "./src/ShowHeirarchy.jsx",
+    "./AnimatedFileSystem": "./src/AnimatedFileSystem.jsx",
     "./ToggleGroup": "./src/ToggleGroup.jsx",
     "./Dialog": "./src/Dialog.jsx",
     "./DialogButton": "./src/DialogButton.jsx",

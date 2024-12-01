@@ -1,0 +1,31 @@
+{
+  "background": {
+    "description": "Default background color of main components including the body",
+    "group": "main"
+  },
+  "primary": { "description": "Primary colors for Buttons", "group": "main" },
+  "primary-foreground": {
+    "description": "Foreground color for Buttons",
+    "group": "main"
+  },
+  "sidebar-foreground": {
+    "description": "Defaults to foreground",
+    "group": "extra"
+  },
+  "sidebar-primary": { "description": "Defaults to primary", "group": "extra" },
+  "sidebar-primary-foreground": {
+    "description": "Defaults to primary-foreground",
+    "group": "extra"
+  },
+  "sidebar-accent": { "description": "Defaults to accent", "group": "extra" },
+  "sidebar-accent-foreground": {
+    "description": "Defaults to accent-foreground",
+    "group": "extra"
+  },
+  "sidebar-border": "extra",
+  "array": [1, 2, 3],
+  "sidebar-ring": [
+    { "description": "Defaults to ring", "group": "extra" },
+    { "description": "Defaults to ring", "group": "extra" }
+  ]
+}

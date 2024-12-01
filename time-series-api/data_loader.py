@@ -16,14 +16,23 @@ import logging
 log = logging.getLogger(__name__)
 log.debug(__file__ +" Logging Enabled")
 
-class Labeled_Time_Entry(BaseModel):
-    value: float
-    timestamp: datetime
-    anomaly_label: bool
+router = APIRouter(prefix="/loader", tags=["loader"])
 
 class Time_Entry(BaseModel):
     value: float
     timestamp: datetime
+
+class Labeled_Time_Entry(Time_Entry):
+    anomaly_label: bool
+
+class Prediction_Entry(Time_Entry):
+    anomaly_score: float
+
+@router.post("/load_prediction_file", status_code=status.HTTP_200_OK)
+def load_prediction_file(file_url: str):
+    log.debug((file_url))
+    entries = load_csv_file(file_url,Prediction_Entry)
+    return entries
 
 def load_csv_file(filepath,file_schema):
     df_dataset = pd.read_csv(filepath)

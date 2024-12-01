@@ -1,0 +1,81 @@
+{
+  "id": "93da4a0f-0f34-4e36-ae33-c96704dee50d",
+  "time_created": "2024-11-05T13:55:00.156830Z",
+  "time_updated": "2024-11-05T13:55:00.155970Z",
+  "name": "artificialWithAnomaly",
+  "description": "Artificially-generated data with varying types of anomalies.",
+  "tags": ["nab"],
+  "datafeeds": [
+    {
+      "id": "ee736828-7d42-4dfb-abd8-d82af92be48f",
+      "time_created": "2024-11-05T13:55:02.719981Z",
+      "time_updated": "2024-11-05T13:55:03.472847Z",
+      "name": "Art Daily Jumpsup",
+      "folder": "artificialWithAnomaly",
+      "filename": "art_daily_jumpsup.csv",
+      "feed_type": "file",
+      "tags": ["artificial"],
+      "start_time": "2014-04-01T00:00:00Z",
+      "end_time": "2014-04-01T00:05:00Z",
+      "collection_id": "93da4a0f-0f34-4e36-ae33-c96704dee50d",
+      "datasets": [
+        {
+          "id": "ee9e15ac-fed7-46f7-8bf1-ae510008001b",
+          "time_created": "2024-11-05T13:55:02.719981Z",
+          "time_updated": "2024-11-05T13:55:03.568245Z",
+          "folder": "artificialWithAnomaly",
+          "filename": "art_daily_jumpsup.csv",
+          "path": "artificialWithAnomaly/art_daily_jumpsup.csv",
+          "labeled": true,
+          "file_type": "csv",
+          "anomaly_count": 1,
+          "tags": ["real"],
+          "start_time": "2014-04-01T00:00:00Z",
+          "end_time": "2014-04-01T00:05:00Z",
+          "datafeed_id": "ee736828-7d42-4dfb-abd8-d82af92be48f",
+          "predictions": [
+            {
+              "id": "9e1861e1-53d3-49d7-bd2d-f394f7866c18",
+              "time_created": "2024-11-05T13:55:08.943522Z",
+              "time_updated": "2024-11-05T13:55:12.658458Z",
+              "dataset_id": "13c42a08-d04a-45e4-a736-094cc4c7cd7a",
+              "dataset_name": "realTweets/Twitter_volume_UPS.csv",
+              "detector_id": "48b925ce-8ed3-4b4b-8804-2b212c66ff30",
+              "detector_name": "labeler",
+              "url": "/app/static/nab/predictions/labeler/realTweets/labeler_Twitter_volume_UPS.csv",
+              "anomalies": [
+                {
+                  "id": "6649d6da-867d-498d-ad47-52af1a7586b1",
+                  "time_created": "2024-11-05T13:55:08.943522Z",
+                  "time_updated": "2024-11-05T13:55:12.867981Z",
+                  "value": 53,
+                  "time": "2015-03-03T00:27:53Z",
+                  "anomaly_score": 0,
+                  "threshold": 0,
+                  "status": "test",
+                  "severity": "low",
+                  "tags": ["label"],
+                  "detector_id": "48b925ce-8ed3-4b4b-8804-2b212c66ff30",
+                  "detector_name": "labeler",
+                  "dataset_name": "realTweets/Twitter_volume_UPS.csv",
+                  "prediction_id": "9e1861e1-53d3-49d7-bd2d-f394f7866c18"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "health": {
+        "id": "6cc570ac-bb01-42c7-aec3-02103f92fa5d",
+        "time_created": "2024-11-05T13:55:02.719981Z",
+        "time_updated": "2024-11-05T13:55:03.762431Z",
+        "last_received": "2024-11-05T13:55:00.409714Z",
+        "heartbeat_frequency": 3600,
+        "heartbeat_timeout": 3,
+        "score": 100,
+        "status": "active",
+        "datafeed_id": "ee736828-7d42-4dfb-abd8-d82af92be48f"
+      }
+    }
+  ]
+}

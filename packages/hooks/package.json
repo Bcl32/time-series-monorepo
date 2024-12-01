@@ -4,7 +4,8 @@
   "exports": {
     "./useDatabaseMutation": "./src/useDatabaseMutation.js",
     "./useGetRequest": "./src/useGetRequest.js",
-    "./useBokehChart": "./src/useBokehChart.js"
+    "./useBokehChart": "./src/useBokehChart.js",
+    "./useDataLoader": "./src/useDataLoader.js"
   },
   "description": "React hooks",
   "author": "",

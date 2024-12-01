@@ -1,40 +1,32 @@
-//THIRD PARTY LIBRARIES
-import React from "react";
-
-//MONOREPO PACKAGE IMPORTS
-import { useGetRequest } from "@repo/hooks/useGetRequest";
-
 //LOCAL COMPONENTS
-import { HealthTableData } from "./components/tables/HealthTableData";
-import NavigationBreadcrumb from "./NavigationBreadcrumb";
+import { LoadAllEntities } from "./LoadAllEntities";
 import EntityViewer from "./EntityViewer";
 //component data
-import HealthModelData from "./metadata/HealthModelData.json";
+import MainModelData from "./metadata/HealthModelData.json";
+import { HealthTableData as TableData } from "./components/tables/HealthTableData";
 
 export default function AllHealth() {
-  const get_api_url = HealthModelData.get_api_url;
-  const getResponse = useGetRequest(get_api_url);
+  const get_api_url = MainModelData.get_api_url;
 
-  if (getResponse.isSuccess) {
-    var dataset = getResponse.data; //runs every state update
+  var { dataset } = LoadAllEntities({
+    get_api_url: get_api_url,
+    name: MainModelData.set_name,
+  });
 
-    var breadcrumb = [];
-  }
-
-  var table_metadata = HealthTableData({
+  var table_metadata = TableData({
     add_api_url: "n/a",
     query_invalidation: [get_api_url],
     create_enabled: false,
   });
+
   return (
     <div>
-      {getResponse.isSuccess && (
+      {dataset && (
         <div>
-          <NavigationBreadcrumb data={breadcrumb} />
           <EntityViewer
-            name="Health Objects"
+            name={MainModelData.set_name}
             dataset={dataset}
-            ModelData={HealthModelData}
+            ModelData={MainModelData}
             table_config={table_metadata}
           ></EntityViewer>
         </div>

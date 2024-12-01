@@ -5,34 +5,38 @@ import { Outlet } from "react-router-dom";
 import { DialogButton } from "@repo/utils/DialogButton";
 import { Button } from "@repo/utils/Button";
 
-import { ThemeGenerator } from "@repo/themes/ThemeGenerator";
+import { Theming } from "@repo/themes/Theming";
 import { ThemeProvider } from "@repo/themes/ThemeProvider";
-import { ThemeSelector } from "@repo/themes/ThemeSelector";
+
+import { NavigationProvider } from "./NavigationProvider";
+import NavigationBreadcrumb from "./NavigationBreadcrumb";
 
 export default function Layout({ children }) {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <SidebarProvider>
-        <MainSidebar />
-        <main>
-          <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-            <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <ThemeSelector></ThemeSelector>
+      <NavigationProvider>
+        <SidebarProvider>
+          <MainSidebar />
+          <main>
+            <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+              <SidebarTrigger />
+              <Separator orientation="vertical" className="mr-2 h-4" />
 
-            <DialogButton
-              button={<Button variant="default">Themes</Button>}
-              size="big"
-              title="Theme Editor"
-            >
-              <ThemeGenerator />
-            </DialogButton>
-          </header>
+              <DialogButton
+                button={<Button variant="default">Themes</Button>}
+                size="big"
+                title="Theme Editor"
+              >
+                <Theming />
+              </DialogButton>
+              <NavigationBreadcrumb />
+            </header>
 
-          {children}
-          <Outlet />
-        </main>
-      </SidebarProvider>
+            {children}
+            <Outlet />
+          </main>
+        </SidebarProvider>
+      </NavigationProvider>
     </ThemeProvider>
   );
 }

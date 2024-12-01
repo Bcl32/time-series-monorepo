@@ -2,9 +2,9 @@
   "name": "@repo/themes",
   "version": "1.0.0",
   "exports": {
+    "./Theming": "./src/Theming.jsx",
     "./ThemeGenerator": "./src/ThemeGenerator.jsx",
-    "./ThemeProvider": "./src/ThemeProvider.jsx",
-    "./ThemeSelector": "./src/ThemeSelector.jsx"
+    "./ThemeProvider": "./src/ThemeProvider.jsx"
   },
   "description": "Theme components and functions",
   "author": "",

@@ -39,35 +39,35 @@ export function CopyTheme({ currentTheme, colours }) {
   }
 
   return (
-    <DialogButton key={"dialog-copy-theme"}>
-      <DialogButton.Button asChild>
-        <Button variant="outline">
+    <DialogButton
+      key={"dialog-copy-theme"}
+      button={
+        <Button variant="default">
           <Copy className="w-4 h-4 mr-2" /> Copy Theme
         </Button>
-      </DialogButton.Button>
+      }
+      title="Copy Theme"
+    >
+      <ToggleGroup
+        type="single"
+        variant="outline"
+        value={format}
+        onValueChange={(value) => {
+          setFormat(value);
+        }}
+      >
+        <ToggleGroupItem value="json">{"json"}</ToggleGroupItem>
+        <ToggleGroupItem value="css">{"css"}</ToggleGroupItem>
+      </ToggleGroup>
 
-      <DialogButton.Content title="Copy Theme" variant="default">
-        <ToggleGroup
-          type="single"
-          variant="outline"
-          value={format}
-          onValueChange={(value) => {
-            setFormat(value);
-          }}
-        >
-          <ToggleGroupItem value="json">{"json"}</ToggleGroupItem>
-          <ToggleGroupItem value="css">{"css"}</ToggleGroupItem>
-        </ToggleGroup>
-
-        <Button
-          variant="outline"
-          onClick={copyTheme}
-          className="flex items-center text-primary"
-          title="Copy Theme"
-        >
-          <Copy className="w-4 h-4 mr-2" /> <span>Copy Theme</span>
-        </Button>
-      </DialogButton.Content>
+      <Button
+        variant="outline"
+        onClick={copyTheme}
+        className="flex items-center text-primary"
+        title="Copy Theme"
+      >
+        <Copy className="w-4 h-4 mr-2" /> <span>Copy Theme</span>
+      </Button>
     </DialogButton>
   );
 }

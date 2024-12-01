@@ -44,11 +44,6 @@ PAYLOAD_MODEL=prediction_schema.Prediction_Base
 
 ANOMALY_MODEL = anomaly_schema.Anomaly_Base
 
-class Prediction_Entry(BaseModel):
-    value: float
-    timestamp: datetime
-    anomaly_score: float
-
 # CREATE WITH TWO PARENTS
 @router.post("/create", status_code=status.HTTP_201_CREATED)
 async def create(
@@ -131,14 +126,20 @@ async def get_by_column(repository: ModelRepository, column: str, value: list[st
 
 # GET BY ID
 @router.get("/get_by_id/{id}", status_code=status.HTTP_200_OK)
-async def get_by_id(id: uuid.UUID, repository: ModelRepository)-> MODEL:
+async def get_by_id(id: uuid.UUID, repository: ModelRepository):
     db_object = await repository.get(id)
     if db_object is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=MODEL_NAME+" does not exist",
         )
-    return MODEL.model_validate(db_object)
+    
+    obj_heirarchy=build_object_heirarchy(db_object=db_object, base_object=PAYLOAD_MODEL.model_validate(db_object), inheritance_chain=["dataset","datafeed","collection"])
+    log.debug((obj_heirarchy))
+    metadata=MODEL.model_validate(db_object)
+  
+    response ={"metadata":metadata, "obj_heirarchy":obj_heirarchy}
+    return response
 
 # UPDATE
 @router.post("/update", status_code=status.HTTP_200_OK)
@@ -160,30 +161,3 @@ async def delete(
 ) -> int:
     rows = await repository.delete(column=column,value=value)
     return rows
-
-# LOAD DATASET
-# GET BY ID
-@router.get("/load_prediction_file/{id}", status_code=status.HTTP_200_OK)
-async def load_prediction_file(
-    id: uuid.UUID,
-     repository: ModelRepository,
-):
-    db_object = await repository.get(id)
-    if db_object is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=MODEL_NAME+" does not exist",
-        )
-
-    folder = db_object.dataset.folder
-    filename = db_object.dataset.filename
-    dataset_filepath= Path(config.NAB_ASSETS / "predictions" / db_object.detector_name) / folder / Path(db_object.detector_name+"_"+filename)
-    log.debug((dataset_filepath))
-    entries = load_csv_file(dataset_filepath,Prediction_Entry)
-
-
-    obj_heirarchy=build_object_heirarchy(db_object=db_object, base_object=PAYLOAD_MODEL.model_validate(db_object), inheritance_chain=["dataset","datafeed","collection"])
-    metadata=MODEL.model_validate(db_object)
-
-    response ={"metadata":metadata, "entries":entries, "obj_heirarchy":obj_heirarchy}
-    return response

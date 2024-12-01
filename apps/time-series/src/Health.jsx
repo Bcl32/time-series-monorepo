@@ -1,32 +1,30 @@
+import React from "react";
 //THIRD PARTY LIBRARIES
 import { useLocation } from "react-router-dom";
-//MONOREPO PACKAGE IMPORTS
-import { useGetRequest } from "@repo/hooks/useGetRequest";
 
 //LOCAL COMPONENTS
-import NavigationBreadcrumb from "./NavigationBreadcrumb";
 import Metadata from "./Metadata";
+import { LoadEntity } from "./LoadEntity";
 
 //MODEL SPECIFIC IMPORTS
 import MainModelData from "./metadata/HealthModelData.json";
 
 export default function Health() {
-  const children_attributes = [];
   const { state } = useLocation();
+  const child_attr_name = "";
+  const children_attributes = [];
+
   const get_api_url =
     MainModelData.api_url_base + "/get_by_id" + "/" + state?.object_id;
-  const getResponse = useGetRequest(get_api_url);
-
-  if (getResponse.isSuccess) {
-    var metadata = getResponse.data.metadata;
-    var obj_heirarchy = getResponse.data.obj_heirarchy;
-  }
+  var { metadata, dataset, obj_heirarchy } = LoadEntity({
+    child_attr_name: child_attr_name,
+    get_api_url: get_api_url,
+  });
 
   return (
     <div>
-      {getResponse.isSuccess && (
+      {metadata && (
         <div>
-          <NavigationBreadcrumb data={obj_heirarchy} />
           <div className="grid xl:grid-cols-12">
             <div className="col-span-6">
               <Metadata

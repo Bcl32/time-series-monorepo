@@ -1,12 +1,10 @@
 //THIRD PARTY LIBRARIES
 import { useLocation } from "react-router-dom";
-//MONOREPO PACKAGE IMPORTS
-import { useGetRequest } from "@repo/hooks/useGetRequest";
 
 //LOCAL COMPONENTS
-import NavigationBreadcrumb from "./NavigationBreadcrumb";
 import Metadata from "./Metadata";
 import EntityViewer from "./EntityViewer";
+import { LoadEntity } from "./LoadEntity";
 
 //MODEL SPECIFIC IMPORTS
 import { DatasetsTableData as ChildTableData } from "./components/tables/DatasetsTableData";
@@ -21,13 +19,11 @@ export default function Datafeed() {
   const get_api_url =
     MainModelData.api_url_base + "/get_by_id" + "/" + state?.object_id;
 
-  const getResponse = useGetRequest(get_api_url);
+  var { metadata, dataset, obj_heirarchy } = LoadEntity({
+    child_attr_name: child_attr_name,
+    get_api_url: get_api_url,
+  });
 
-  if (getResponse.isSuccess) {
-    var metadata = getResponse.data.metadata;
-    var obj_heirarchy = getResponse.data.obj_heirarchy;
-    var dataset = metadata[child_attr_name];
-  }
   var table_metadata = ChildTableData({
     add_api_url: ChildModelData.api_url_base + "/create/" + state?.object_id,
     query_invalidation: [get_api_url],
@@ -35,10 +31,8 @@ export default function Datafeed() {
 
   return (
     <div>
-      {getResponse.isSuccess && (
+      {metadata && (
         <div>
-          <NavigationBreadcrumb data={obj_heirarchy} />
-
           <div className="grid xl:grid-cols-12">
             <div className="col-span-6">
               <Metadata

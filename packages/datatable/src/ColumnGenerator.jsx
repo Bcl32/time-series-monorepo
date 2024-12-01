@@ -34,22 +34,23 @@ export function ColumnGenerator({
     cell: ({ cell, row }) => {
       return (
         <div>
-          <DialogButton key={"dialog-" + row.original.id}>
-            <DialogButton.Button asChild>
-              <Button variant="default" size="icon">
+          <DialogButton
+            key={"dialog-" + row.original.id}
+            button={
+              <Button size="icon">
                 <EditIcon />
               </Button>
-            </DialogButton.Button>
-
-            <DialogButton.Content title="Edit Entry" variant="grey">
-              <EditModelForm
-                key={"entryform_edit_data_entry"}
-                add_api_url={ModelData.add_api_url}
-                ModelData={ModelData}
-                query_invalidation={query_invalidation}
-                obj_data={row.original}
-              />
-            </DialogButton.Content>
+            }
+            variant="grey"
+            title="Edit Entry"
+          >
+            <EditModelForm
+              key={"entryform_edit_data_entry"}
+              add_api_url={ModelData.add_api_url}
+              ModelData={ModelData}
+              query_invalidation={query_invalidation}
+              obj_data={row.original}
+            />
           </DialogButton>
         </div>
       );

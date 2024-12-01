@@ -1,26 +1,17 @@
-//THIRD PARTY LIBRARIES
-import React from "react";
-
-//MONOREPO PACKAGE IMPORTS
-import { useGetRequest } from "@repo/hooks/useGetRequest";
-
 //LOCAL COMPONENTS
-import { PredictionsTableData } from "./components/tables/PredictionsTableData";
-import NavigationBreadcrumb from "./NavigationBreadcrumb";
+import { LoadAllEntities } from "./LoadAllEntities";
 import EntityViewer from "./EntityViewer";
 //component data
-import PredictionModelData from "./metadata/PredictionModelData.json";
-
+import MainModelData from "./metadata/PredictionModelData.json";
+import { PredictionsTableData as TableData } from "./components/tables/PredictionsTableData";
 export default function AllPredictions() {
-  const get_api_url = PredictionModelData.get_api_url;
-  const getResponse = useGetRequest(get_api_url);
+  const get_api_url = MainModelData.get_api_url;
+  var { dataset } = LoadAllEntities({
+    get_api_url: get_api_url,
+    name: MainModelData.set_name,
+  });
 
-  if (getResponse.isSuccess) {
-    var dataset = getResponse.data; //runs every state update
-    var breadcrumb = [];
-  }
-
-  var table_metadata = PredictionsTableData({
+  var table_metadata = TableData({
     add_api_url: "n/a",
     query_invalidation: [get_api_url],
     create_enabled: false,
@@ -28,13 +19,12 @@ export default function AllPredictions() {
 
   return (
     <div>
-      {getResponse.isSuccess && (
+      {dataset && (
         <div>
-          <NavigationBreadcrumb data={breadcrumb} />
           <EntityViewer
-            name="Predictions"
+            name={MainModelData.set_name}
             dataset={dataset}
-            ModelData={PredictionModelData}
+            ModelData={MainModelData}
             table_config={table_metadata}
           ></EntityViewer>
         </div>

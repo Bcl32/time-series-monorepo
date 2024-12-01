@@ -19,20 +19,17 @@ def build_object_heirarchy(db_object, base_object, inheritance_chain):
     parent=db_object #inialize with main object to start chain
     for item in inheritance_chain:
         model=getattr(parent, item)
-        #fetch name if exists
-        name = getattr(model,  "name", model.__table__.name)
+        name = getattr(model,  "name", model.__table__.name)#fetch name if exists
 
         #encode db object to pydantic
-        schema = load_class_from_package("schemas",item+"_schema",item.capitalize() +"_Base")
-        # module = importlib.import_module(item+"_schema")
-        #schema = getattr(module,item.capitalize() +"_DB")
+        schema = load_class_from_package(package_name="schemas",module_name=item+"_schema",class_name=item.capitalize() +"_Base")
         encoded_model=schema.model_validate(model)
-        print(encoded_model)
 
         obj_heirarchy.append({ "type": item, "object":encoded_model, "id": model.id, "name":name })
         parent=model #model becomes the parent for the next iteration
 
     obj_heirarchy.reverse()#reverses order so first element is the farthest parent
-    name = getattr(db_object,  "name", db_object.__table__.name)
+    
+    name = getattr(db_object,  "name", db_object.__table__.name)#fetch name if exists
     obj_heirarchy.append({ "type": db_object.__table__.name, "object":base_object, "id": db_object.id, "name": name }) #add in main object
     return obj_heirarchy

@@ -4,12 +4,13 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { useTheme } from "@repo/themes/ThemeProvider";
 import clsx from "clsx";
 export const TabContent = TabPanel;
+
 export function AnimatedTabs({ tab_titles, children }) {
   var test = tab_titles[0] + tab_titles[1]; //unique value for layoutid
   const { theme_type } = useTheme();
   const motion_style = clsx("colouring", {
     "absolute inset-0 z-10": true,
-    "bg-primary mix-blend-screen": theme_type === "dark",
+    "bg-primary/80 mix-blend-screen": theme_type === "dark",
     "bg-primary/70 mix-blend-multiply": theme_type === "light",
   });
   let [activeTab, setActiveTab] = useState(0);

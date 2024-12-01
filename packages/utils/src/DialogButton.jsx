@@ -111,7 +111,7 @@ function ModalContent({
           <DialogPrimitive.Title className="text-xl">
             {title}
           </DialogPrimitive.Title>
-          <DialogPrimitive.Close className="text-primary-foreground hover:text-accent">
+          <DialogPrimitive.Close className="text-foreground hover:text-accent">
             <X />
           </DialogPrimitive.Close>
         </div>
@@ -134,7 +134,7 @@ const contentVariants = cva(
       },
       size: {
         default: "fixed left-1/2 top-1/2 w-full max-w-md",
-        big: "fixed left-1/2 top-1/2 w-full max-w-4xl",
+        big: "fixed left-1/2 top-1/2 w-full max-w-screen-2xl h-full max-h-[1000px]",
       },
     },
     defaultVariants: {
@@ -143,6 +143,3 @@ const contentVariants = cva(
     },
   }
 );
-
-DialogButton.Button = DialogPrimitive.Trigger;
-DialogButton.Content = ModalContent;

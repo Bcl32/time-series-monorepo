@@ -1,4 +1,6 @@
 {
+  "model_name": "Anomaly",
+  "set_name": "Anomalies",
   "chart_filters": [
     { "name": "detector_name", "type": "bar", "key": "count" },
     { "name": "anomaly_score", "type": "histogram", "key": "bins" },

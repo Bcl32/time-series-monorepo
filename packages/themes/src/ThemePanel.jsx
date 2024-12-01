@@ -20,13 +20,15 @@ export function ThemePanel({ name, styles }) {
       onClick={() => setTheme(name)}
     >
       <div className="text-center" style={{ color: styles["foreground"] }}>
-        <p className="text-sm font-medium">{name}</p>
+        <p className="text-md capitalize font-medium">{name}</p>
       </div>
 
       <Card
         key={name}
         className={`
           p-4 
+          mx-4
+          my-1
           flex 
           flex-col 
           items-center 
@@ -36,13 +38,11 @@ export function ThemePanel({ name, styles }) {
       >
         <div className="row">
           <div style={{ background: styles["primary"] }}>
-            {styles["primary"]}
+            <p style={{ color: styles["primary-foreground"] }}>Primary</p>
           </div>
           <div style={{ background: styles["secondary"] }}>
-            {styles["secondary"]}
+            <p style={{ color: styles["secondary-foreground"] }}>Secondary</p>
           </div>
-
-          {/* <img src="static/images/styling.svg" data-colour="{{value.icons}}" data-name={{key}} class="styling_image"> */}
         </div>
       </Card>
     </div>
