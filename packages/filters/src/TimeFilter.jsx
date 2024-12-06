@@ -78,7 +78,7 @@ export function TimeFilter({ name, ...props }) {
             }
             size="big"
             title={"Change datetime for " + name}
-            variant="grey"
+            variant="default"
           >
             <TimeEditDialog
               filters={filters}

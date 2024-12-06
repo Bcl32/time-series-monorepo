@@ -10,6 +10,7 @@ dayjs.extend(timezone);
 import { Input } from "@repo/utils/Input";
 import { Label } from "@repo/utils/Label";
 import { Checkbox } from "@repo/utils/Checkbox";
+import { Select } from "@repo/utils/Select";
 
 // mui x
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -78,7 +79,7 @@ export function FormElement({
           <div>
             <Label> {name[0].toUpperCase() + name.slice(1)}:</Label>
             <Input
-              variant="default"
+              variant="background"
               size="default"
               id={"input_" + name}
               name={name}
@@ -96,7 +97,7 @@ export function FormElement({
           <div className="w-48">
             <Label> {name[0].toUpperCase() + name.slice(1)}:</Label>
             <Input
-              variant="default"
+              variant="background"
               size="lg"
               id={"input_" + name}
               name={name}
@@ -164,26 +165,22 @@ export function FormElement({
       return (
         <div className="flex col-2">
           <div className="w-48">
-            <label
-              htmlFor={name}
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              {/* capitalizes the string */}
-              {name[0].toUpperCase() + name.slice(1)}:
-            </label>
-            <select
+            <Label className="capitalize" htmlFor={name}>
+              {" "}
+              {name}:
+            </Label>
+            <Select
               name={name}
               value={formData[name]}
               onChange={handleChange}
               id={"input_" + name}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               {entry_data.options.map((entry) => (
                 <option key={entry.value} value={entry.value}>
                   {entry.label}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
         </div>
       );

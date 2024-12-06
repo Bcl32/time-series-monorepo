@@ -139,7 +139,7 @@ function TimeEditDialog({
         </div>
       </div>
 
-      <div className="grid w-[32rem] grid-cols-7 gap-2 rounded-xl bg-gray-200 p-2">
+      <div className="grid w-[32rem] grid-cols-7 gap-2 rounded-xl bg-muted-foreground p-2">
         {[
           { interval_name: "Second", value: "s" },
           { interval_name: "Minute", value: "m" },

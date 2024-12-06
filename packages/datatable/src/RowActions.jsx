@@ -83,8 +83,6 @@ export function RowActions({ row, ModelData, query_invalidation }) {
               Edit
             </DropdownMenuItem>
           }
-          size="big"
-          variant="grey"
           title="Edit Entry"
         >
           <EditModelForm

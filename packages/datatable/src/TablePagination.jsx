@@ -6,13 +6,7 @@ import {
 } from "@radix-ui/react-icons";
 
 import { Button } from "@repo/utils/Button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@repo/utils/Select";
+import { Input } from "@repo/utils/Input";
 
 export function DataTablePagination({ table }) {
   return (
@@ -23,42 +17,20 @@ export function DataTablePagination({ table }) {
       </div>
 
       <div className="flex items-center space-x-6 lg:space-x-8">
-        {/* <span>
-          Go to page:
-          <input
-            type="number"
-            defaultValue={table.getState().pagination.pageIndex + 1}
+        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+          Page
+          <Input
+            variant="default"
+            size="default"
+            value={table.getState().pagination.pageIndex + 1}
             onChange={(e) => {
               const page = e.target.value ? Number(e.target.value) - 1 : 0;
               table.setPageIndex(page);
             }}
-            className="border p-1 rounded w-16"
-          />
-        </span> */}
-
-        {/* <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">Rows per page</p>
-          <Select
-            value={`${table.getState().pagination.pageSize}`}
-            onValueChange={(value) => {
-              table.setPageSize(Number(value));
-            }}
-          >
-            <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue placeholder={table.getState().pagination.pageSize} />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[10, 20, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div> */}
-        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page
-          <input
+            type="number"
+            className="h-8 w-16"
+          ></Input>
+          {/* <input
             type="number"
             value={table.getState().pagination.pageIndex + 1}
             onChange={(e) => {
@@ -66,7 +38,7 @@ export function DataTablePagination({ table }) {
               table.setPageIndex(page);
             }}
             className="border p-1 rounded w-16"
-          />
+          /> */}
           <span className="px-1">of</span> {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">

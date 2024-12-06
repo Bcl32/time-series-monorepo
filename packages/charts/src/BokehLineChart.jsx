@@ -4,6 +4,11 @@ import React from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
+//ui
+import { Label } from "@repo/utils/Label";
+import { Select } from "@repo/utils/Select";
+import { Checkbox } from "@repo/utils/Checkbox";
+
 //MONOREPO PACKAGE IMPORTS
 import { useBokehChart } from "@repo/hooks/useBokehChart";
 
@@ -57,6 +62,15 @@ export function BokehLineChart(props) {
     });
   }
 
+  function handleCheckboxChange(name, value) {
+    setGraphOptions((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  }
+
   //special formData updater function for select comboboxes as input differs from other inputs are objects and multiple items can used
   function handleComboboxChange(attribute, value) {
     var entries = [];
@@ -104,89 +118,94 @@ export function BokehLineChart(props) {
           >
             Palette
           </label>
-          <select
+
+          <Select
             name="palette"
             id="input_palette"
             onChange={handleChange}
             value={graphOptions.palette}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            {/* <option selected>Activity</option> */}
             <option value="Category10">Category10</option>
             <option value="Accent">Accent</option>
             <option value="Dark2">Dark2</option>
-          </select>
+          </Select>
         </div>
 
         <div className="flex items-center mb-4">
-          <input
+          <Checkbox
             name="missing_values"
-            onChange={handleChange}
+            checked={graphOptions.missing_values}
+            onCheckedChange={(checked) => {
+              handleCheckboxChange("missing_values", checked);
+            }}
+            className="w-6 h-6 border-2"
             id="missing_values-checkbox"
             type="checkbox"
-            checked={graphOptions.missing_values}
             value={graphOptions.missing_values}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          ></input>
-          <label
+          />
+          <Label
+            className="text-lg leading-none"
             htmlFor="missing_values-checkbox"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
             Show Missing Values
-          </label>
+          </Label>
         </div>
 
         <div className="flex items-center mb-4">
-          <input
+          <Checkbox
             name="second_graph"
-            onChange={handleChange}
+            checked={graphOptions.second_graph}
+            onCheckedChange={(checked) => {
+              handleCheckboxChange("second_graph", checked);
+            }}
+            className="w-6 h-6 border-2"
             id="second_graph-checkbox"
             type="checkbox"
-            checked={graphOptions.second_graph}
             value={graphOptions.second_graph}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          ></input>
-          <label
+          />
+          <Label
+            className="text-lg leading-none"
             htmlFor="second_graph-checkbox"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
             Add Linked Graph
-          </label>
+          </Label>
         </div>
 
         <div className="flex items-center mb-4">
-          <input
+          <Checkbox
             name="labels"
-            onChange={handleChange}
+            checked={graphOptions.labels}
+            onCheckedChange={(checked) => {
+              handleCheckboxChange("labels", checked);
+            }}
+            className="w-6 h-6 border-2"
             id="labels-checkbox"
             type="checkbox"
-            checked={graphOptions.labels}
             value={graphOptions.labels}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          ></input>
-          <label
-            htmlFor="labels-checkbox"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
+          />
+          <Label className="text-lg leading-none" htmlFor="labels-checkbox">
             Show Labels
-          </label>
+          </Label>
         </div>
+
         <div className="flex items-center mb-4">
-          <input
+          <Checkbox
             name="show_anomalies"
-            onChange={handleChange}
+            checked={graphOptions.show_anomalies}
+            onCheckedChange={(checked) => {
+              handleCheckboxChange("show_anomalies", checked);
+            }}
+            className="w-6 h-6 border-2"
             id="show_anomalies-checkbox"
             type="checkbox"
-            checked={graphOptions.show_anomalies}
             value={graphOptions.show_anomalies}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          ></input>
-          <label
+          />
+          <Label
+            className="text-lg leading-none"
             htmlFor="show_anomalies-checkbox"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
             Show Anomalies
-          </label>
+          </Label>
         </div>
 
         <Autocomplete

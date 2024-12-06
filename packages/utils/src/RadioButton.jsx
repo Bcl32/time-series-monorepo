@@ -16,7 +16,7 @@ export function RadioButton(props) {
       />
       <label
         htmlFor={props.interval_name}
-        className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+        className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-primary/50 peer-checked:font-bold peer-checked:text-white"
       >
         {props.interval_name}
       </label>

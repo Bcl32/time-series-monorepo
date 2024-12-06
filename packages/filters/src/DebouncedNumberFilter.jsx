@@ -4,6 +4,8 @@ import { FilterContext } from "./FilterContext";
 
 //MONOREPO PACKAGE IMPORTS
 import { Button } from "@repo/utils/Button";
+import { Input } from "@repo/utils/Input";
+import { Label } from "@repo/utils/Label";
 import { ToggleGroup, ToggleGroupItem } from "@repo/utils/ToggleGroup";
 import { Slider } from "@repo/utils/Slider";
 import * as SliderPrimitive from "@radix-ui/react-slider";
@@ -31,7 +33,7 @@ function DebouncedNumberFilter({ name, ...props }) {
   }
 
   const handleInputChange = (index, value) => {
-    // const newValue = parseInt(value, 10);
+    const newValue = parseInt(value, 10);
     if (!isNaN(value) && value >= slider_min && value <= slider_max) {
       //const newValues = [...values];
       const newValues = [min, max];
@@ -82,24 +84,22 @@ function DebouncedNumberFilter({ name, ...props }) {
       </span>
 
       <div>
-        <input
-          type="number"
+        <Label className="capitalize" htmlFor={`input-${0}`}>
+          Min:
+        </Label>
+        <Input
+          key={"number_select_min"}
+          variant="background"
+          size="default"
+          id={`input-${0}`}
           name={name}
+          value={min}
+          onChange={(e) => handleInputChange(0, e.target.value)}
+          type="number"
+          placeholder=""
           min={slider_min}
           max={slider_max}
-          value={min}
-          key={"duration_select"}
-          onChange={(e) => handleInputChange(0, e.target.value)}
-          // onChange={handleInputChange}
-          id={`input-${0}`}
-          className="peer p-4 block w-48 border-gray-200 rounded-lg text-2xl placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-        />
-        <label
-          htmlFor="hs-floating-input-email"
-          className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white"
-        >
-          {name[0].toUpperCase() + name.slice(1)}
-        </label>
+        ></Input>
       </div>
 
       <SliderPrimitive.Root
@@ -123,24 +123,22 @@ function DebouncedNumberFilter({ name, ...props }) {
       </SliderPrimitive.Root>
 
       <div>
-        <input
-          type="number"
+        <Label className="capitalize" htmlFor={`input-${1}`}>
+          Max:
+        </Label>
+        <Input
+          key={"number_select_max"}
+          variant="background"
+          size="default"
+          id={`input-${1}`}
           name={name}
+          value={max}
+          onChange={(e) => handleInputChange(1, e.target.value)}
+          type="number"
+          placeholder=""
           min={slider_min}
           max={slider_max}
-          value={max}
-          key={"duration_select"}
-          onChange={(e) => handleInputChange(1, e.target.value)}
-          // onChange={handleInputChange}
-          id={`input-${1}`}
-          className="peer p-4 block w-full border-gray-200 rounded-lg text-2xl placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-        />
-        <label
-          htmlFor="hs-floating-input-email"
-          className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white"
-        >
-          {name[0].toUpperCase() + name.slice(1)}
-        </label>
+        ></Input>
       </div>
 
       <Button onClick={reset_value} variant="default" size="lg">

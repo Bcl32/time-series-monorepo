@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import EditIcon from "@mui/icons-material/Edit";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Checkbox } from "@repo/utils/Checkbox";
 
 //other modules
 import dayjs from "dayjs";
@@ -73,25 +73,26 @@ export function ColumnGenerator({
     id: "select",
     minSize: 10,
     maxSize: 10,
-    header: ({ table }) => (
-      <input
-        {...{
-          type: "checkbox",
-          checked: table.getIsAllRowsSelected(),
-
-          onChange: table.getToggleAllRowsSelectedHandler(),
-        }}
-      />
-    ),
+    header: ({ table }) => {
+      var all_selected = table.getIsAllRowsSelected();
+      return (
+        <Checkbox
+          checked={table.getIsAllRowsSelected()}
+          onCheckedChange={(checked) => {
+            table.toggleAllRowsSelected(checked);
+          }}
+          className={"w-5 h-5 border-2"}
+        />
+      );
+    },
     cell: ({ row }) => (
       <div className="px-0">
-        <input
+        <Checkbox
           {...{
-            type: "checkbox",
+            name: "checkbox" + row.id,
             checked: row.getIsSelected(),
-            disabled: !row.getCanSelect(),
-
-            onChange: row.getToggleSelectedHandler(),
+            onCheckedChange: row.getToggleSelectedHandler(),
+            className: "w-5 h-5",
           }}
         />
       </div>

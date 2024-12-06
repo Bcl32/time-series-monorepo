@@ -45,6 +45,7 @@
 @layer base {
   :root {
     --radius: 0.5rem;
+    scrollbar-color: #007 #bada55;
   }
   * {
     @apply border-border;
@@ -52,4 +53,18 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: hsl(var(--primary)) hsl(var(--accent)) !important;
+}
+
+/* not needed in recent browsers */
+::-webkit-scrollbar-track {
+  background: hsl(var(--accent));
+}
+/* not needed in recent browsers */
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--primary));
 }

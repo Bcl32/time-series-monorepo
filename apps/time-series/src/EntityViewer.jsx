@@ -5,7 +5,6 @@ import { AllFilters } from "@repo/filters/AllFilters";
 import { ChartFilter } from "@repo/filters/ChartFilter";
 import { InitializeFilters } from "@repo/filters/InitializeFilters";
 import { FiltersSummary } from "@repo/filters/FiltersSummary";
-import { GroupFilters } from "@repo/filters/GroupFilters";
 import { FilterContext } from "@repo/filters/FilterContext";
 import { GetSubkeyValues } from "@repo/filters/GetSubkeyValues";
 
@@ -45,14 +44,6 @@ export function EntityViewer({
     setFilters(InitializeFilters(ModelData.model_attributes, datasetStats));
   }, [dataset]); //runs effect whenever dataset updates, itializes the filter object
 
-  let {
-    string_filters,
-    numeric_filters,
-    select_filters,
-    list_filters,
-    time_filters,
-  } = GroupFilters(filters);
-
   var charts = ModelData.chart_filters.map((entry) => {
     //find stat for feature by key
     var chart_data = filteredStats[entry["name"]].find((obj) => {
@@ -83,7 +74,7 @@ export function EntityViewer({
         }}
       >
         <div className="grid xl:grid-cols-12 py-3">
-          <div className="col-span-7">
+          <div className="col-span-6">
             {dataset.length == 0 && (
               <div>
                 No <span className="capitalize">{name}</span> found.
@@ -98,7 +89,7 @@ export function EntityViewer({
                   %)
                 </h1>
 
-                <AnimatedTabs tab_titles={["Summary", "Charts"]}>
+                <AnimatedTabs tab_titles={["Summary", "Charts", "Filters"]}>
                   <div className="overflow-auto">
                     <TabContent className="h-96">
                       <FiltersSummary
@@ -112,35 +103,25 @@ export function EntityViewer({
                     <TabContent>
                       <div className="grid xl:grid-cols-2">{charts}</div>
                     </TabContent>
+                    <TabContent>
+                      <AllFilters
+                        name={name}
+                        dataset={dataset}
+                        filteredData={filteredData}
+                        filters={filters}
+                        change_filters={change_filters}
+                        datasetStats={datasetStats}
+                        filteredStats={filteredStats}
+                        ModelData={ModelData}
+                      />
+                    </TabContent>
                   </div>
                 </AnimatedTabs>
-
-                {/* {string_filters.map((entry) => {
-                  return (
-                    <FilterElement key={entry["name"]} filter_data={entry} />
-                  );
-                })}
-                {time_filters.map((entry) => {
-                  return (
-                    <FilterElement key={entry["name"]} filter_data={entry} />
-                  );
-                })} */}
-
-                {/* <AllFilters
-                  name={name}
-                  dataset={dataset}
-                  filteredData={filteredData}
-                  filters={filters}
-                  change_filters={change_filters}
-                  datasetStats={datasetStats}
-                  filteredStats={filteredStats}
-                  ModelData={ModelData}
-                /> */}
               </div>
             )}
           </div>
 
-          <div className="col-span-5">
+          <div className="col-span-6 px-2">
             <DataTable
               title={name}
               create_enabled={table_config.create_enabled}

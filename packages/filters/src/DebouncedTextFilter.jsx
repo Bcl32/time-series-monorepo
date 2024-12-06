@@ -4,6 +4,8 @@ import { FilterContext } from "./FilterContext";
 
 //MONOREPO PACKAGE IMPORTS
 import { Button } from "@repo/utils/Button";
+import { Input } from "@repo/utils/Input";
+import { Label } from "@repo/utils/Label";
 import { ToggleGroup, ToggleGroupItem } from "@repo/utils/ToggleGroup";
 
 function DebouncedTextFilter({ name, ...props }) {
@@ -38,21 +40,17 @@ function DebouncedTextFilter({ name, ...props }) {
 
   return (
     <div className="flex flex-row items-center justify-between p-1 space-x-1">
-      <span className="font-semibold">
-        {/* capitalizes the string */}
-        {name[0].toUpperCase() + name.slice(1)}:
-      </span>
-
-      <input
-        name={name}
+      <Label className="capitalize"> {name}:</Label>
+      <Input
+        variant="background"
+        size="default"
         id={"filter_" + name}
+        name={name}
         value={inputValue}
         onChange={handleInputChange}
         type="text"
-        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-        //className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         placeholder=""
-      />
+      ></Input>
 
       <ToggleGroup
         type="single"
