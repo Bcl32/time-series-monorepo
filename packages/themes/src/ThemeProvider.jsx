@@ -7,7 +7,8 @@ const initialState = {
 };
 
 const ThemeProviderContext = createContext(initialState);
-
+//site is initialized with system settings, so a light theme or a dark theme is applied based on system preferences
+//once a custom theme has been chosen, it will be saved locally and remembered for the next time the page is loaded
 export function ThemeProvider({
   children,
   defaultTheme = "system",

@@ -19,34 +19,38 @@ import Prediction from "./Prediction";
 import Health from "./Health";
 import Layout from "./Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useAuthProvider } from "./auth/hooks/AuthProvider";
 
 // Create a client
 const queryClient = new QueryClient();
 
 function MainApp() {
+  const { AuthProvider } = useAuthProvider();
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="Dashboard" element={<Dashboard />} />
-            <Route path="AllCollections" element={<AllCollections />} />
-            <Route path="AllDatafeeds" element={<AllDatafeeds />} />
-            <Route path="AllDatasets" element={<AllDatasets />} />
-            <Route path="AllDetectors" element={<AllDetectors />} />
-            <Route path="AllAnomalies" element={<AllAnomalies />} />
-            <Route path="AllPredictions" element={<AllPredictions />} />
-            <Route path="AllHealth" element={<AllHealth />} />
-            <Route path="Collection" element={<Collection />} />
-            <Route path="Datafeed" element={<Datafeed />} />
-            <Route path="Detector" element={<Detector />} />
-            <Route path="Dataset" element={<Dataset />} />
-            <Route path="Prediction" element={<Prediction />} />
-            <Route path="Health" element={<Health />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="Dashboard" element={<Dashboard />} />
+              <Route path="AllCollections" element={<AllCollections />} />
+              <Route path="AllDatafeeds" element={<AllDatafeeds />} />
+              <Route path="AllDatasets" element={<AllDatasets />} />
+              <Route path="AllDetectors" element={<AllDetectors />} />
+              <Route path="AllAnomalies" element={<AllAnomalies />} />
+              <Route path="AllPredictions" element={<AllPredictions />} />
+              <Route path="AllHealth" element={<AllHealth />} />
+              <Route path="Collection" element={<Collection />} />
+              <Route path="Datafeed" element={<Datafeed />} />
+              <Route path="Detector" element={<Detector />} />
+              <Route path="Dataset" element={<Dataset />} />
+              <Route path="Prediction" element={<Prediction />} />
+              <Route path="Health" element={<Health />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
 
       <ReactQueryDevtools />
     </QueryClientProvider>

@@ -29,6 +29,7 @@ class Anomaly_Base(BaseModel):
 
 
 class Anomaly_DB(Anomaly_Base,DatabaseObject):
+    """Anomaly database model."""
     model_config = ConfigDict(from_attributes=True)
     prediction_id: uuid.UUID = Field(json_schema_extra={'source': 'db'})
 

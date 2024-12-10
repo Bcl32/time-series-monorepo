@@ -19,7 +19,7 @@ class Health_Base(BaseModel):
     status: Status = Field(default='inactive',  json_schema_extra={'data_type': 'select'})
 
 class Health_DB(Health_Base,DatabaseObject):
-    """Health payload model."""
+    """Health database model."""
     model_config = ConfigDict(from_attributes=True)
     datafeed_id: uuid.UUID = Field(json_schema_extra={'data_type': 'id'})
     #dataset_name: str = Field(min_length=1, max_length=127, json_schema_extra={'data_type': 'text'})

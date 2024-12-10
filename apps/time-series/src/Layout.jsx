@@ -1,3 +1,12 @@
+import {
+  AuthenticatedTemplate,
+  useMsal,
+  useIsAuthenticated,
+  UnauthenticatedTemplate,
+} from "@azure/msal-react";
+import { SignInButton } from "./auth/SignInButton";
+import { SignOutButton } from "./auth/SignOutButton";
+
 import { SidebarProvider, SidebarTrigger } from "@repo/utils/Sidebar";
 import { Separator } from "@repo/utils/Separator";
 import { MainSidebar } from "./MainSidebar";
@@ -12,6 +21,10 @@ import { NavigationProvider } from "./NavigationProvider";
 import NavigationBreadcrumb from "./NavigationBreadcrumb";
 
 export default function Layout({ children }) {
+  const { instance } = useMsal();
+  const activeAccount = instance.getActiveAccount();
+  const isAuthenticated = useIsAuthenticated();
+
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <NavigationProvider>
@@ -31,6 +44,13 @@ export default function Layout({ children }) {
               </DialogButton>
               <NavigationBreadcrumb />
             </header>
+            {isAuthenticated ? <SignOutButton /> : <SignInButton />}
+            <AuthenticatedTemplate>
+              {activeAccount ? <p>You are signed in</p> : null}
+            </AuthenticatedTemplate>
+            <UnauthenticatedTemplate>
+              <p>Please sign in!</p>
+            </UnauthenticatedTemplate>
 
             {children}
             <Outlet />

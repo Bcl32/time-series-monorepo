@@ -20,7 +20,7 @@ class Detector_Base(BaseModel):
     tags: list[str] = Field(default=[])
 
 class Detector_DB(Detector_Base, DatabaseObject):
-    """Detector model."""
+    """Detector database model."""
     model_config = ConfigDict(from_attributes=True)
     anomalies: list[anomaly_schema.Anomaly_DB]
     predictions: list[prediction_schema.Prediction_DB]

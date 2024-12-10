@@ -20,7 +20,7 @@ import style_metadata from "./style_metadata.json";
 export function Theming() {
   const { theme, theme_options } = useTheme();
 
-  var theme_colours = get_theme_values(Themes[theme]);
+  var theme_colours = get_theme_values(theme);
 
   const [colours, setColours] = useState(theme_colours);
 
@@ -35,7 +35,14 @@ export function Theming() {
     }
   }
 
-  function get_theme_values() {
+  function get_theme_values(theme) {
+    //the very first time a user visits, the theme will be 'system' so it needs to be translated to the light or dark theme applied in the themeprovider, otherwise the Theme object has no key of 'system'
+    if (theme === "system") {
+      var theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+
     var initial_colours = {};
     for (const [key, value] of Object.entries(Themes[theme])) {
       initial_colours[key] = hslToObject(value);

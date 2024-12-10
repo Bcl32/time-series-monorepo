@@ -14,12 +14,12 @@ class Collection_Base(BaseModel):
     tags: list[str] = Field(default=[])
 
 class Collection_DB(Collection_Base,DatabaseObject):
-    """Datafeed model."""
+    """Collection database model."""
     model_config = ConfigDict(from_attributes=True)
     datafeeds: list[datafeed_schema.Datafeed_DB] 
 
 class Collection_Display(Collection_Base,DatabaseObject):
-    """Datafeed model."""
+    """Collection display model that uses datafeed children with abridged attributes."""
     model_config = ConfigDict(from_attributes=True)
     datafeeds: list[datafeed_schema.Datafeed_Child] 
 

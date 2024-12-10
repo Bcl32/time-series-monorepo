@@ -18,6 +18,8 @@
     "@repo/charts": "*",
     "@repo/datatable": "*",
     "@repo/test-package": "*",
+    "@azure/msal-browser": "^3.27.0",
+    "@azure/msal-react": "^2.2.0",
     "@radix-ui/react-dialog": "*",
     "@headlessui/react": "2.1.1",
     "@bokeh/bokehjs": "^2.4.3",

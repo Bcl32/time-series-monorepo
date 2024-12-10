@@ -18,6 +18,6 @@ class Prediction_Base(BaseModel):
     url:str
 
 class Prediction_DB(Prediction_Base, DatabaseObject):
-    """Prediction model."""
+    """Prediction database model."""
     model_config = ConfigDict(from_attributes=True)
     anomalies: list[anomaly_schema.Anomaly_DB]
