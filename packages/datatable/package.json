@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "exports": {
     "./DataTable": "./src/DataTable.jsx",
+    "./Table": "./src/Table.jsx",
     "./KeyValueTable": "./src/KeyValueTable.jsx",
     "./StatsTable": "./src/StatsTable.jsx",
     "./ColumnGenerator": "./src/ColumnGenerator.jsx",

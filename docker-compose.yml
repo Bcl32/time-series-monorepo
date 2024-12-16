@@ -49,6 +49,16 @@ services:
   #     - ./scripts/create_test_db.sh:/docker-entrypoint-initdb.d/create_test_db.sh
   #   restart: always
 
+  reverse-proxy:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./nginx/:/etc/nginx/ssl/:ro
+
   time-series-react:
     container_name: time-series-react
     build:

@@ -18,6 +18,7 @@ import Detector from "./Detector";
 import Prediction from "./Prediction";
 import Health from "./Health";
 import Layout from "./Layout";
+import Claims from "./Claims";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useAuthProvider } from "./auth/hooks/AuthProvider";
 
@@ -34,6 +35,7 @@ function MainApp() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Dashboard />} />
               <Route path="Dashboard" element={<Dashboard />} />
+              <Route path="Claims" element={<Claims />} />
               <Route path="AllCollections" element={<AllCollections />} />
               <Route path="AllDatafeeds" element={<AllDatafeeds />} />
               <Route path="AllDatasets" element={<AllDatasets />} />
