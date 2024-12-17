@@ -7,14 +7,15 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from config import DATABASE_URL
+from config import AsyncPostgres
+settings = AsyncPostgres()
 
 import logging
 logging.basicConfig()
 logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
-    engine = create_async_engine(DATABASE_URL)#, echo=True
+    engine = create_async_engine(settings.DATABASE_URL)#, echo=True
     factory = async_sessionmaker(engine)
     async with factory() as session:
         try:
