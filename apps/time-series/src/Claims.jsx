@@ -1,7 +1,7 @@
 import React from "react";
-import { ClaimsDisplay } from "./auth/ClaimsDisplay";
-import { SignInButton } from "./auth/SignInButton";
-import { SignOutButton } from "./auth/SignOutButton";
+import { ClaimsDisplay } from "@repo/auth/ClaimsDisplay";
+import { SignInButton } from "@repo/auth/SignInButton";
+import { SignOutButton } from "@repo/auth/SignOutButton";
 import {
   AuthenticatedTemplate,
   useMsal,

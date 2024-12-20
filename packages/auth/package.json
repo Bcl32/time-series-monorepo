@@ -1,0 +1,19 @@
+{
+    "name": "@repo/auth",
+    "version": "1.0.0",
+    "exports": {
+      "./ClaimsDisplay": "./src/ClaimsDisplay.jsx",
+      "./SignInButton": "./src/SignInButton.jsx",
+     "./SignOutButton": "./src/SignOutButton.jsx",
+      "./AuthProvider": "./src/AuthProvider.jsx"
+    },
+    "description": "Authentication scripts and components",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "react": "^18.2.0",
+    "@azure/msal-browser": "^3.27.0",
+    "@azure/msal-react": "^2.2.0"
+    }
+  }
+  

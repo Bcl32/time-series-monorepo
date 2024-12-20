@@ -20,7 +20,7 @@ import Health from "./Health";
 import Layout from "./Layout";
 import Claims from "./Claims";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useAuthProvider } from "./auth/hooks/AuthProvider";
+import { useAuthProvider } from "@repo/auth/AuthProvider";
 
 // Create a client
 const queryClient = new QueryClient();

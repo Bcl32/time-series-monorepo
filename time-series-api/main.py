@@ -32,6 +32,7 @@ from database_routes import collection, datafeed, dataset, anomaly, detector, pr
 auth_settings=Authentication()
 
 app = FastAPI(
+     root_path="/api",
     swagger_ui_oauth2_redirect_url='/oauth2-redirect',
     swagger_ui_init_oauth={
         'usePkceWithAuthorizationCodeGrant': True,

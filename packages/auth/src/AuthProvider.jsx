@@ -1,6 +1,6 @@
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication, EventType } from "@azure/msal-browser";
-import { msalConfig } from "../AuthConfig";
+import { msalConfig } from "./AuthConfig";
 
 export const AuthProvider = ({ children }) => {
   const msalInstance = new PublicClientApplication(msalConfig);
