@@ -1,8 +1,7 @@
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication, EventType } from "@azure/msal-browser";
-import { msalConfig } from "./AuthConfig";
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({msalConfig, children }) => {
   const msalInstance = new PublicClientApplication(msalConfig);
 
   // Default to using the first account if no account is active on page load

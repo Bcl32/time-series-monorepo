@@ -20,6 +20,7 @@ import Health from "./Health";
 import Layout from "./Layout";
 import Claims from "./Claims";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { msalConfig } from "./AuthConfig";
 import { useAuthProvider } from "@repo/auth/AuthProvider";
 
 // Create a client
@@ -29,7 +30,7 @@ function MainApp() {
   const { AuthProvider } = useAuthProvider();
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
+      <AuthProvider msalConfig={msalConfig}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
