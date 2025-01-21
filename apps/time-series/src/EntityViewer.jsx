@@ -74,7 +74,7 @@ export function EntityViewer({
         }}
       >
         <div className="grid xl:grid-cols-12 py-3">
-          <div className="col-span-6">
+          <div className="col-span-6 responsive">
             {dataset.length == 0 && (
               <div>
                 No <span className="capitalize">{name}</span> found.
@@ -129,9 +129,17 @@ export function EntityViewer({
               defaultSort={table_config.defaultSort}
               columnVisibility={table_config.columnVisibility}
               columns={table_config.columns}
-              renderSubComponent={table_config.renderSubComponent}
+              renderSubComponent={
+                table_config.renderSubComponent
+                  ? table_config.renderSubComponent
+                  : undefined
+              }
               ModelData={ModelData}
-              rowClickFunction={() => {}}
+              rowClickFunction={
+                table_config.rowClickFunction
+                  ? table_config.rowClickFunction
+                  : undefined
+              }
               query_invalidation={table_config.query_invalidation}
               add_api_url={table_config.add_api_url}
             />

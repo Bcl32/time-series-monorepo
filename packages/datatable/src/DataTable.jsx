@@ -80,14 +80,26 @@ export function DataTable(props) {
     },
   });
 
-  function fillFormFromTable(data) {
-    props.setFormData(data);
+  function rowClickFunction(data) {
+    console.log(data);
   }
 
-  var rowClickFunction = fillFormFromTable; //fillFormFromTable is the default function to activate on click
-  if ("rowClickFunction" in props) {
-    //if an alternative click function is provided as a prop
-    rowClickFunction = props.rowClickFunction; //the passed prop function is now used on click instead
+  if (props.rowClickFunction !== undefined) {
+    rowClickFunction = props.rowClickFunction; //if an alternative click function is provided as a prop the passed prop function is now used on click instead
+  }
+
+  function renderSubComponent({ row }) {
+    return (
+      <div className="h-96 overflow-scroll">
+        <pre style={{ fontSize: "20px", whiteSpace: "pre-wrap" }}>
+          <code>{JSON.stringify(row.original, null, 2)}</code>
+        </pre>
+      </div>
+    );
+  }
+
+  if (props.renderSubComponent !== undefined) {
+    renderSubComponent = props.renderSubComponent; //if an alternative renderSubComponent function is provided as a prop the passed prop function is now used instead
   }
 
   return (
@@ -238,7 +250,7 @@ export function DataTable(props) {
                   <TableRow>
                     {/* 2nd row is a custom 1 cell row */}
                     <TableCell colSpan={row.getVisibleCells().length}>
-                      {props.renderSubComponent({ row })}
+                      {renderSubComponent({ row })}
                     </TableCell>
                   </TableRow>
                 )}

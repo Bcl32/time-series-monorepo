@@ -86,23 +86,12 @@ export function CollectionsTableData({
     time_updated: false,
   };
 
-  const renderSubComponent = ({ row }) => {
-    return (
-      <div className="h-96 overflow-scroll">
-        <pre style={{ fontSize: "20px" }}>
-          <code>{JSON.stringify(row.original, null, 2)}</code>
-        </pre>
-      </div>
-    );
-  };
-
   let table_settings = {
     columns: columns,
     create_enabled: create_enabled,
     defaultSort: "time_created",
     columnVisibility: columnVisibility,
     query_invalidation: query_invalidation,
-    renderSubComponent: renderSubComponent,
     add_api_url: add_api_url,
   };
 

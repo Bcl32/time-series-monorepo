@@ -132,7 +132,7 @@ function format_stats(data) {
         });
 
         var formatted_count = (
-          <div className="max-h-36 w-xl max-w-2xl overflow-auto whitespace-pre-line">
+          <div className="max-h-36 max-w-lg overflow-auto whitespace-pre-line">
             {count}
           </div>
         );
