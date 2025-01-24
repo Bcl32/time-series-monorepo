@@ -6,6 +6,7 @@ import {
 } from "@azure/msal-react";
 import { SignInButton } from "@repo/auth/SignInButton";
 import { SignOutButton } from "@repo/auth/SignOutButton";
+import { AuthStatusPanel } from "@repo/auth/AuthStatusPanel";
 
 import { SidebarProvider, SidebarTrigger } from "@repo/utils/Sidebar";
 import { Separator } from "@repo/utils/Separator";
@@ -44,13 +45,14 @@ export default function Layout({ children }) {
               </DialogButton>
               <NavigationBreadcrumb />
             </header>
-            {isAuthenticated ? <SignOutButton /> : <SignInButton />}
+
+            {/* {isAuthenticated ? <SignOutButton /> : <SignInButton />}
             <AuthenticatedTemplate>
               {activeAccount ? <p>You are signed in</p> : null}
             </AuthenticatedTemplate>
             <UnauthenticatedTemplate>
               <p>Please sign in!</p>
-            </UnauthenticatedTemplate>
+            </UnauthenticatedTemplate> */}
 
             {children}
             <Outlet />

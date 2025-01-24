@@ -21,10 +21,16 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuAction,
+  SidebarHeader,
   SidebarMenuItem,
   SidebarRail,
 } from "@repo/utils/Sidebar";
+
 import { Link } from "react-router-dom";
+
+import { AuthStatusPanel } from "@repo/auth/AuthStatusPanel";
+import { AuthCurrentUser } from "@repo/auth/AuthCurrentUser";
+
 // Menu items.
 const items = [
   {
@@ -72,6 +78,11 @@ const items = [
 export function MainSidebar() {
   return (
     <Sidebar className="bg-card" collapsible="icon">
+      <SidebarHeader>
+        <AuthCurrentUser
+          user={{ name: "Name", email: "Email" }}
+        ></AuthCurrentUser>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
@@ -79,18 +90,20 @@ export function MainSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild tooltip={item.title}>
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
+                  <div></div>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarRail />
     </Sidebar>
   );
 }
