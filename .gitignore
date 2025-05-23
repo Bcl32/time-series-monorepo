@@ -8,6 +8,7 @@ apps/tracker
 
 #static / resource files
 time-series-api/static/
+chatbot-api/static/
 
 #config
 apps/time-series/src/AuthConfig.js
@@ -15,6 +16,7 @@ apps/time-series/src/AuthConfig.js
 #keys
 nginx/*.crt
 nginx/*.key
+nginx/*.pem
 
 # Logs
 time-series-api/httpx.txt

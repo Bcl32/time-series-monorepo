@@ -4,9 +4,6 @@ import {
   useIsAuthenticated,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
-import { SignInButton } from "@repo/auth/SignInButton";
-import { SignOutButton } from "@repo/auth/SignOutButton";
-import { AuthStatusPanel } from "@repo/auth/AuthStatusPanel";
 
 import { SidebarProvider, SidebarTrigger } from "@repo/utils/Sidebar";
 import { Separator } from "@repo/utils/Separator";

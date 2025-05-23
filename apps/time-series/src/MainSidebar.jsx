@@ -28,7 +28,6 @@ import {
 
 import { Link } from "react-router-dom";
 
-import { AuthStatusPanel } from "@repo/auth/AuthStatusPanel";
 import { AuthCurrentUser } from "@repo/auth/AuthCurrentUser";
 
 // Menu items.

@@ -4,7 +4,7 @@ services:
   reverse-proxy:
     image: nginx:latest
     ports:
-      - 80:80
+      - 8080:80
       - 443:443
     restart: always
     volumes:
@@ -94,3 +94,13 @@ services:
     #   - /dev/dri:/dev/dri #optional
     shm_size: "1gb"
     restart: unless-stopped
+
+  chatbot-api:
+    build:
+      context: .
+      dockerfile: ./chatbot-api/Dockerfile
+    container_name: chatbot-api
+    volumes:
+      - ./chatbot-api:/app
+      - ./python-modules:/app/python-modules
+      - ./rag_vector_db.sqlite:/app/rag_vector_db.sqlite # Mount the SQLite DB for persistence

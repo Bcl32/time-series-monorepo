@@ -23,7 +23,7 @@
     "./RadioButton": "./src/RadioButton.jsx",
     "./Slider": "./src/Slider.jsx",
     "./Breadcrumb": "./src/Breadcrumb.jsx",
-    "./UseIsMobile": "/src/UseisMobile.jsx",
+    "./UseIsMobile": "./src/UseIsMobile.jsx",
     "./ComputeTimeBounds": "./functions/ComputeTimeBounds.js",
     "./ComputeGroupedStats": "./functions/ComputeGroupedStats.js",
     "./CalculateFeatureStats": "./functions/CalculateFeatureStats.js",
