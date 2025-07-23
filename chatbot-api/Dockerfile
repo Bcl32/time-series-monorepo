@@ -11,4 +11,4 @@ COPY ./python-modules/ /app/python-modules
 
 EXPOSE 8000
 
-CMD ["bash"]
+CMD ["uvicorn", "main:app", "--reload", "--reload-exclude",  "*.txt", "--host", "0.0.0.0", "--port", "8000"]
