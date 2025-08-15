@@ -29,7 +29,7 @@ export function EntityViewer({
 
   //console.log(active_filters, filteredData, datasetStats, filteredStats);
 
-  function change_filters(name, key, value) {
+  function change_filters(name, key, value) {n
     setFilters({
       ...filters, // Copy other fields
       [name]: {

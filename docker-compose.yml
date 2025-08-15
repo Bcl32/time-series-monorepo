@@ -15,15 +15,14 @@ services:
     container_name: time-series-react
     build:
       context: .
-      dockerfile: ./apps/time-series/Dockerfile
+      dockerfile: ./time-series-react/Dockerfile
     # ports:
     #   - 3200:3000
-    working_dir: /app/apps/time-series
+    #working_dir: /app/apps/time-series
     entrypoint: ["yarn", "dev"]
     volumes: #these volumes enable hot reload for file changes
-      #- ./apps/time-series/src:/app/apps/time-series/src #source code for current project
-      - ./apps/time-series:/app/apps/time-series #all code for current project
-      - ./packages:/app/packages #shared turborepo packages
+      - ./time-series-react/src:/app/src #all code for current project
+      - ./packages:/app/src/packages #shared turborepo packages
     tty: true
 
   time-series-api:
@@ -73,27 +72,27 @@ services:
     #   - "5032:80"
     restart: always
 
-  obsidian:
-    image: lscr.io/linuxserver/obsidian:latest
-    container_name: obsidian
-    # security_opt:
-    #   - seccomp:unconfined #optional
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - SUBFOLDER=/obsidian/
-      - DOCKER_MODS=linuxserver/mods:universal-git
-    volumes:
-      - ./obsidian/config:/config
-      - ./obsidian/vaults:/vaults
-    # ports:
-    #   - 3000:3000
-    #   - 3001:3001
-    # devices:
-    #   - /dev/dri:/dev/dri #optional
-    shm_size: "1gb"
-    restart: unless-stopped
+  # obsidian:
+  #   image: lscr.io/linuxserver/obsidian:latest
+  #   container_name: obsidian
+  #   # security_opt:
+  #   #   - seccomp:unconfined #optional
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #     - SUBFOLDER=/obsidian/
+  #     - DOCKER_MODS=linuxserver/mods:universal-git
+  #   volumes:
+  #     - ./obsidian/config:/config
+  #     - ./obsidian/vaults:/vaults
+  #   # ports:
+  #   #   - 3000:3000
+  #   #   - 3001:3001
+  #   # devices:
+  #   #   - /dev/dri:/dev/dri #optional
+  #   shm_size: "1gb"
+  #   restart: unless-stopped
 
   chatbot-api:
     build:

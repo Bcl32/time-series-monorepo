@@ -9,6 +9,7 @@ export default defineConfig({
       usePolling: true,
     },
     host: true,
+    allowedHosts: true, // Not recommended for production
     port: 3000,
     proxy: {
       "/api": {
