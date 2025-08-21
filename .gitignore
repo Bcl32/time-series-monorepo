@@ -13,8 +13,14 @@ apps/tracker
 time-series-api/static/
 chatbot-api/static/
 
+#Dockerfiles
+/time-series-react/Dockerfile
+/time-series-api/Dockerfile
+/chatbot-api/Dockerfile
+
 #config
 time-series-react/src/AuthConfig.js
+nginx/conf/nginx.conf
 
 #keys
 nginx/*.crt

@@ -16,9 +16,6 @@ services:
     build:
       context: .
       dockerfile: ./time-series-react/Dockerfile
-    # ports:
-    #   - 3200:3000
-    #working_dir: /app/apps/time-series
     entrypoint: ["yarn", "dev"]
     volumes: #these volumes enable hot reload for file changes
       - ./time-series-react/src:/app/src #all code for current project
@@ -30,14 +27,11 @@ services:
     build:
       context: .
       dockerfile: ./time-series-api/Dockerfile
-    # image: fastapi_v4
     environment:
       - CONTAINER_PATH=/app
     depends_on:
       time-series-db:
         condition: service_healthy
-    # ports:
-    #   - 8000:8000
     volumes:
       - ./time-series-api:/app
       - ./python-modules:/app/python-modules
@@ -68,31 +62,7 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-    # ports:
-    #   - "5032:80"
     restart: always
-
-  # obsidian:
-  #   image: lscr.io/linuxserver/obsidian:latest
-  #   container_name: obsidian
-  #   # security_opt:
-  #   #   - seccomp:unconfined #optional
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #     - SUBFOLDER=/obsidian/
-  #     - DOCKER_MODS=linuxserver/mods:universal-git
-  #   volumes:
-  #     - ./obsidian/config:/config
-  #     - ./obsidian/vaults:/vaults
-  #   # ports:
-  #   #   - 3000:3000
-  #   #   - 3001:3001
-  #   # devices:
-  #   #   - /dev/dri:/dev/dri #optional
-  #   shm_size: "1gb"
-  #   restart: unless-stopped
 
   chatbot-api:
     build:
