@@ -6,7 +6,7 @@ WORKDIR /app
 #COPY package.json package-lock.json ./
 
 COPY ./time-series-react/ .
-#COPY ./packages/ ./src/
+COPY ./packages/ ./src/packages/
 
 RUN npm install
 

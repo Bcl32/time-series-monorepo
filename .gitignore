@@ -6,12 +6,15 @@ habit-tracker-db/
 habit-tracker-api/
 apps/tracker
 
+## react packages copy
+/time-series-react/src/packages/
+
 #static / resource files
 time-series-api/static/
 chatbot-api/static/
 
 #config
-apps/time-series/src/AuthConfig.js
+time-series-react/src/AuthConfig.js
 
 #keys
 nginx/*.crt

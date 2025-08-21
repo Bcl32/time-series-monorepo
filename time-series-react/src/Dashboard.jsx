@@ -23,7 +23,7 @@ export default function Dashboard() {
       <DisplaySchema></DisplaySchema>
       <hr></hr>
       <ShowHeirarchy json_data={entity_map_example}></ShowHeirarchy>
-      <h1>Test update hot reloading!?</h1>
+      <h1>Test update hot reloading!? again?</h1>
     </div>
   );
 }
